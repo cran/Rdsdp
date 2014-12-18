@@ -1,0 +1,9 @@
+PKG_CFLAGS=-DNOSHORTS
+PKG_CPPFLAGS=-Idsdp/include
+PKG_LIBS=-Ldsdp/lib -ldsdp ${LAPACK_LIBS} ${BLAS_LIBS} ${FLIBS} -lm
+
+$(SHLIB): dsdp.ts 
+
+dsdp.ts:
+	cd dsdp && $(MAKE) dsdplibrary CC="$(CC)" CFLAGS="$(CFLAGS) $(CPICFLAGS) -DNOSHORTS -I../../include" AR=$(AR) RANLIB=$(RANLIB)
+	touch $@

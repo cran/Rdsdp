@@ -1,0 +1,9 @@
+#!/bin/sh
+
+(cd src/dsdp/;
+    if test -f Makefile; then
+       make clean
+    fi)
+
+rm -f config.* autom4te.cache src/dsdp/dsdp.ts src/Makevars
+ 
