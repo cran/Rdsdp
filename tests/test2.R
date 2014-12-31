@@ -1,4 +1,4 @@
-# Test a simple example (Sanity check)
+# Test OPTIONS input (Sanity check)
 library(Rdsdp)
 
 	# Sedumi format example
@@ -15,6 +15,15 @@ library(Rdsdp)
           	1,0,3,1,1,3,rep(0,9)), 2,15,byrow=TRUE)
 	b <- c(1,2)
 
-    ret = dsdp(A,b,C,K)
+    OPTIONS=NULL
+    OPTIONS$maxit=10000
+    OPTIONS$gaptol=0.000001
+    OPTIONS$save="savesol.dat-s"
+    OPTIONS$print=10
+    OPTIONS$logsummary=0
+    OPTIONS$outputstats=1
+
+
+    ret = dsdp(A,b,C,K,OPTIONS)
     ret
 

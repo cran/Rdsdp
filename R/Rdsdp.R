@@ -44,8 +44,8 @@ dsdp <- function(A, b, C, K, OPTIONS=NULL){
 }
 
 dsdp.readsdpa <- function(sdpa_filename, options_filename="") {
-  
-  result <- .Call("dsdp", sdpa_filename, options_filename, PACKAGE="Rdsdp")
+  if(file.exists(sdpa_filename)) result <- .Call("dsdp", sdpa_filename, options_filename, PACKAGE="Rdsdp")
+  else stop('File does not exist!')
   result
 }
 

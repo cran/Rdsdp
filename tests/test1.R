@@ -1,20 +1,20 @@
-# Test Rdsdp for sdpa data sets from $DSDPROOT/bin
+# Test a simple example (Sanity check)
 library(Rdsdp)
 
-datapath="../Rdsdp/extdata/"
-tol=0.000001
+	# Sedumi format example
+	K=NULL
+	K$s=c(2,3)
+	K$l=2
 
-target=c(8.999996,-17.784626,-40.819012,-226.1573)
-#names(target) = c("truss1", "control1", "vibra1", "mcp100")
+	C=matrix(c(0,0,2,1,1,2,c(3,0,1,
+                       0,2,0,
+                       1,0,3)),1,15,byrow=TRUE)
+	A=matrix(c(0,1,0,0,0,0,c(3,0,1,
+                         0,4,0,
+                         1,0,5),
+          	1,0,3,1,1,3,rep(0,9)), 2,15,byrow=TRUE)
+	b <- c(1,2)
 
-truss1 = dsdp.readsdpa(paste(datapath, "truss1.dat-s", sep="/"))
-all.equal.numeric(target[1], truss1[[3]][[2]], tolerance=tol)
+    ret = dsdp(A,b,C,K)
+    ret
 
-control1 = dsdp.readsdpa(paste(datapath, "control1.dat-s", sep="/"))
-all.equal.numeric(target[2], control1[[3]][[2]], tolerance=tol)
-
-vibra1 = dsdp.readsdpa(paste(datapath, "vibra1.dat-s", sep="/"))
-all.equal.numeric(target[3], vibra1[[3]][[2]], tolerance=tol)
-
-mcp100 = dsdp.readsdpa(paste(datapath, "mcp100.dat-s", sep="/"))
-all.equal.numeric(target[4], mcp100[[3]][[2]], tolerance=tol*100)

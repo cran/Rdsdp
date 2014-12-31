@@ -1,6 +1,6 @@
-03e831ad9c9d6d68607ed9fff421489e *DESCRIPTION
+10ee1d0b3cecee52d9db88ced61566c9 *DESCRIPTION
 768ec16490e6945e01924f4490e406f4 *NAMESPACE
-3ae5bff140f2c0ae642d40f23a32870a *R/Rdsdp.R
+9997f4e4b76291a7fa6e6b02801173ad *R/Rdsdp.R
 231556c950e6f00809b0cc8ac24763ad *cleanup
 420c0b90622558256263ffca8da36ef5 *configure
 66f5b254b3a81618d6bb631adf16233f *configure.ac
@@ -86,7 +86,7 @@ a72b806073e34dfc90263ec5ce82acde *src/dsdp/src/solver/dsdpvec.h
 12764ed68bf23cf132b0aa036034efa7 *src/dsdp/src/sys/Makefile
 dbdec143b6bd7ad36a433463f9de4731 *src/dsdp/src/sys/dsdperror.c
 16c8d5249abc32dcf73e4f07a5bd4064 *src/dsdp/src/sys/dsdplog.c
-3c9b33507627e2697f98773b5587dd43 *src/dsdp/src/sys/dsdploginfo.c
+2fdd4631a97494c0d267c4196eaf5abc *src/dsdp/src/sys/dsdploginfo.c
 b6f7f5fbe2b20ec2db9fd8dbe266b894 *src/dsdp/src/sys/dsdptime.c
 ad60533d31403c01539ddc9b5819657d *src/dsdp/src/vecmat/Makefile
 d7e73e7ff8efed93f83b8ff8ddbd7226 *src/dsdp/src/vecmat/cholmat.c
@@ -112,8 +112,7 @@ ba4aebe6af364e0a03afbbb1a511dd19 *src/dsdp/src/vecmat/sdpvec.c
 c7d2e96cf27a766c9b30dd8f445336c3 *src/dsdp/src/vecmat/sdpxlist.c
 e437a7a2ccfbf385a5735f2291f476ba *src/dsdp/src/vecmat/spds.c
 d95d95d210eee8be22b5bf9a09581014 *src/dsdp/src/vecmat/vech.c
-e4c9e0ce2839275b825b3e4a455d32a3 *src/dsdp/src/vecmat/vechu.c
+7662524f4844e0e989b0fbae4cdbbe26 *src/dsdp/src/vecmat/vechu.c
 6bf93c40211d4df2459f2c94ab4a0b12 *src/dsdp/src/vecmat/zeromat.c
-ca0bb06099307606e0abc582b4a49b9e *tests/test1.R
-98215f74d58ce28de5c902e659d5cad0 *tests/test2.R
-c8bb80614d92daba4886308ead83bafd *tests/test3.R
+98215f74d58ce28de5c902e659d5cad0 *tests/test1.R
+c8bb80614d92daba4886308ead83bafd *tests/test2.R
