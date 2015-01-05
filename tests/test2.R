@@ -18,7 +18,7 @@ library(Rdsdp)
     OPTIONS=NULL
     OPTIONS$maxit=10000
     OPTIONS$gaptol=0.000001
-    OPTIONS$save="savesol.dat-s"
+    # OPTIONS$save="savesol.dat-s"
     OPTIONS$print=10
     OPTIONS$logsummary=0
     OPTIONS$outputstats=1

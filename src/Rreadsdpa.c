@@ -15,9 +15,9 @@
 static int qusort(int[],int[],int[],double[],int,int);
 static int partition(int[],int[],int[],double[],int, int);
 static int Parseline(char *,int *,int *,int *,int *,double *, int *);
-static int ReadInitialPoint(char*, int, double[]);
-static int TCheckArgs0(DSDP,SDPCone,int,int,char *[]);
-static int TCheckArgs(DSDP,SDPCone,int,int,char *[]);
+//static int ReadInitialPoint(char*, int, double[]);
+//static int TCheckArgs0(DSDP,SDPCone,int,int,char *[]);
+//static int TCheckArgs(DSDP,SDPCone,int,int,char *[]);
 static int CheckForConstantMat(double[],int, int);
 static int CountNonzeroMatrices(int, int[],int[], int*);
 
@@ -86,7 +86,7 @@ int rReadSDPAFile(char* data_filename, char *options_filename, double **ysol, in
   double   derr[6],dnorm[3];
   double   ddobj,ppobj,scl,dpot;
   char     savefile[100];
-  char     success='s',sformat;
+  char     sformat;
   FILE     *fout=0;
   DSDPData dddd;
   DSDP     dsdp;
@@ -261,30 +261,22 @@ int rReadSDPAFile(char* data_filename, char *options_filename, double **ysol, in
     info=DSDPGetFinalErrors(dsdp,derr);
     info=DSDPGetIts(dsdp,&its);
       
-    success='s';
     if (printsummary && rank==0){
 
       if (reason == DSDP_CONVERGED){
 	Rprintf("DSDP Converged. \n"); 
-	success='s';
       } else if ( reason == DSDP_UPPERBOUND ){
 	Rprintf("DSDP Terminated Because Dual Objective Exceeded its Bound\n");
-	success='c';
       } else if ( reason == DSDP_SMALL_STEPS ){
 	Rprintf("DSDP Terminated Due to Small Steps\n");
-	success='c';
       } else if ( reason == DSDP_MAX_IT){
 	Rprintf("DSDP Terminated Due Maximum Number of Iterations\n");
-	success='c';
       } else if ( reason == DSDP_INFEASIBLE_START){
 	Rprintf("DSDP Terminated Due to Infeasible Starting Point\n");
-	success='c';
       } else if ( reason == DSDP_INDEFINITE_SCHUR_MATRIX){
 	Rprintf("DSDP Terminated Due to Indefinite Schur Complement\n");
-	success='c';
       } else {
 	Rprintf("DSDP Finished\n");
-	success='c';
       }
 
       if (pdfeasible == DSDP_UNBOUNDED ){
@@ -299,8 +291,6 @@ int rReadSDPAFile(char* data_filename, char *options_filename, double **ysol, in
       Rprintf("DSDP Solve Time:                     %4.3e seconds\n",t5-t4);
       Rprintf("DSDP Preparation and Solve Time:     %4.3e seconds\n\n",t5-t3);
 
-    } else {
-      if (reason == DSDP_CONVERGED){success='s';} else {success='c';}
     }
 
     /* Prepare output */
@@ -339,9 +329,7 @@ int rReadSDPAFile(char* data_filename, char *options_filename, double **ysol, in
 	int n=dddd.blocksizes[j];
 	sformat=dddd.sformat[j];
         // Rprintf("sformat = %c", sformat);
-        int nn = 0;
         if ( sformat == 'P'){
-           nn = n*(n+1)/2;
            DSDPCALLOC2(&xout,double,n*(n+1)/2,&info);DSDPCHKERR(info);
            //info=SDPConeGetStorageFormat(sdpcone,blockj,&UPLQ);DSDPCHKERR(info);
            SDPConeComputeX(sdpcone, j, n, xout, n*(n+1)/2);
@@ -358,8 +346,7 @@ int rReadSDPAFile(char* data_filename, char *options_filename, double **ysol, in
            coneStartIndex = coneStartIndex + n*n;
         }else if(sformat == 'U')
         {
-             nn = n*n;
-   	     DSDPCALLOC2(&xout,double,n*n,&info);DSDPCHKERR(info);
+   	         DSDPCALLOC2(&xout,double,n*n,&info);DSDPCHKERR(info);
              SDPConeComputeX(sdpcone, j, n, xout, n*n);
 	     for (i = 0; i < n; i++) {
                  int k = 0;
@@ -442,9 +429,9 @@ int rReadSDPAFile(char* data_filename, char *options_filename, double **ysol, in
     
 
     if (pdfeasible==DSDP_UNBOUNDED){
-      soltype==3;
+      soltype=3;
     } else if (pdfeasible==DSDP_INFEASIBLE){
-      soltype==4;
+      soltype=4;
     } else { 
       // DSDP_PDFEASIBLE
       soltype=1;
@@ -853,12 +840,13 @@ static int CheckForConstantMat(double v[],int nnz, int n){
 
 static int ComputeY0(DSDP dsdp,DSDPData dddd){
   int i,ii,info,ijnnz=0,spot=0,ddiag=0,diag=0,n=dddd.blocksizes[0],m=dddd.m;
-  double aa,bb=0,ddmax=0,dd=0,cnorm=0;
+  double bb=0,ddmax=0,dd=0,cnorm=0;
+  // double aa;
   char sformat=dddd.sformat[0];
   if (dddd.nblocks>1) return 0;
   if (dddd.fixedvari) return 0;
 
-  info=GetMarkers(1,0,dddd.block+spot,dddd.constraint+spot,&ijnnz);	  
+  info=GetMarkers(1,0,dddd.block+spot,dddd.constraint+spot,&ijnnz);	DSDPCHKERR(info);  
   for (i=0;i<ijnnz;i++){if (cnorm<fabs(dddd.nnz[i])) cnorm=fabs(dddd.nnz[i]);}
   spot+=ijnnz;
   
@@ -905,7 +893,10 @@ static int ComputeY0(DSDP dsdp,DSDPData dddd){
     spot=0; info=GetMarkers(1,0,dddd.block+spot,dddd.constraint+spot,&ijnnz); spot+=ijnnz;
     dd=dddd.nnz[spot]; bb=dddd.dobj[0];diag=1;
     info=GetMarkers(1,1,dddd.block+spot,dddd.constraint+spot,&ijnnz); 
-    if (CheckForConstantMat(dddd.nnz+spot,ijnnz,n)){aa=dddd.nnz[0]; spot+=ijnnz;ii=2;} else {ii=1;}
+    if (CheckForConstantMat(dddd.nnz+spot,ijnnz,n)){
+		// aa=dddd.nnz[0];
+		spot+=ijnnz;ii=2;
+	} else {ii=1;}
     for (i=0;i<n;i++,spot+=ijnnz){
       info=GetMarkers(1,i+ii,dddd.block+spot,dddd.constraint+spot,&ijnnz);
       dd=dddd.nnz[spot];bb=dddd.dobj[i+ii-1];
@@ -918,19 +909,23 @@ static int ComputeY0(DSDP dsdp,DSDPData dddd){
     } 
     if (ii==1 && diag==1){
       info=GetMarkers(1,m,dddd.block+spot,dddd.constraint+spot,&ijnnz);
-      if (CheckForConstantMat(dddd.nnz+spot,ijnnz,n)){aa=dddd.nnz[spot];} else {diag=0;}
+      if (CheckForConstantMat(dddd.nnz+spot,ijnnz,n)){
+		// aa=dddd.nnz[spot];
+	  } else {diag=0;}
     }
     if (diag && cnorm*sqrt(1.0*n)<1e5){  
       /*
       if (ii=2){info = DSDPSetY0(dsdp,1,-10000*aa);} else {info = DSDPSetY0(dsdp,m,-10000*aa);}
       for (i=0;i<n;i++){info = DSDPSetY0(dsdp,i+ii,-100*sqrt(1.0*n)*cnorm);} 
       */
-      /* info=DSDPSetR0(dsdp,cnorm); info=DSDPSetZBar(dsdp,n*n*n*ddmax*cnorm); */ info=DSDPSetPotentialParameter(dsdp,5.0); info=DSDPReuseMatrix(dsdp,0);
+      /* info=DSDPSetR0(dsdp,cnorm); info=DSDPSetZBar(dsdp,n*n*n*ddmax*cnorm); */ 
+	  info=DSDPSetPotentialParameter(dsdp,5.0); info=DSDPReuseMatrix(dsdp,0);
     }
   }
   return 0;
 }
 
+/*
 #undef __FUNCT__
 #define __FUNCT__ "TCheckArgs0"
 static int TCheckArgs0(DSDP dsdp,SDPCone sdpcone, int m,int nargs,char *runargs[]){
@@ -942,7 +937,7 @@ static int TCheckArgs0(DSDP dsdp,SDPCone sdpcone, int m,int nargs,char *runargs[
       iloginfo=atoi(runargs[kk+1]);
     }
   }
-  info=DSDPLogInfoAllow(iloginfo,0);
+  info=DSDPLogInfoAllow(iloginfo,0); DSDPCHKERR(info);
   return 0;
 }
 
@@ -968,15 +963,17 @@ static int TCheckArgs(DSDP dsdp,SDPCone sdpcone, int m,int nargs,char *runargs[]
     } 
   }
 
-  info=DSDPSetOptions(dsdp,runargs,nargs);
-  /*  if (lpcone){info=LPConeScaleBarrier(lpcone,lpb); */
+  info=DSDPSetOptions(dsdp,runargs,nargs); DSDPCHKERR(info);
+  //  if (lpcone){info=LPConeScaleBarrier(lpcone,lpb); 
   if (rank==0){info=DSDPSetStandardMonitor(dsdp,printlevel);}
   if (rank==0){info=DSDPSetFileMonitor(dsdp,printlevel);}
   return(0);
 }
-
+*/
+/*
 #undef __FUNCT__
 #define __FUNCT__ "ReadInitialPoint"
+// ReadUserY 
 static int ReadInitialPoint(char* filename, int m, double yy0[])
 {
   FILE   *fp;
@@ -998,7 +995,8 @@ static int ReadInitialPoint(char* filename, int m, double yy0[])
   }
   fclose(fp);
   return 0;
-} /* ReadUserY */
+}
+*/ 
 
 #ifndef MAXOPTIONS
 #define MAXOPTIONS 40
@@ -1049,7 +1047,7 @@ static int DSDPReadOptions2(DSDP dsdp, char filename[], int* printlevel, int* lo
       thisline[0]='%';
     }
 
-    info=DSDPSetOptions(dsdp,fargs2,2*line);
+    info=DSDPSetOptions(dsdp,fargs2,2*line); DSDPCHKERR(info);
     fclose(fp);
   }
   DSDPFunctionReturn(0);

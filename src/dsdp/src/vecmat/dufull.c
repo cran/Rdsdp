@@ -236,7 +236,7 @@ static void DTRUMatScale(void*AA){
 
 static int DTRUMatCholeskyFactor(void* AA, int *flag){
   dtrumat* A=(dtrumat*) AA;
-  ffinteger INFO,LDA=A->LDA,N=A->n;
+  ffinteger INFO=0,LDA=A->LDA,N=A->n;
   double *AP=A->val;
   char UPLO=A->UPLO;
 
@@ -437,7 +437,7 @@ static int DSDPInitSchurOps(struct  DSDPSchurMat_Ops* mops){
 #undef __FUNCT__
 #define __FUNCT__ "DSDPGetLAPACKSUSchurOps"
 int DSDPGetLAPACKSUSchurOps(int n,struct DSDPSchurMat_Ops** sops, void** mdata){
-  int info,nn,LDA;
+  int info=0,nn,LDA;
   double *vv;
   dtrumat *AA;
   DSDPFunctionBegin;
@@ -538,7 +538,7 @@ static int DTRUMatCholeskyBackwardMultiply(void* AA, double x[], double y[], int
 
 static int DTRUMatInvert(void* AA){
   dtrumat* A=(dtrumat*) AA;
-  ffinteger INFO,LDA=A->LDA,N=A->n,nn=LDA*N;
+  ffinteger INFO=0,LDA=A->LDA,N=A->n,nn=LDA*N;
   double *v=A->val,*AP=A->v2,*ss=A->sscale;
   char UPLO=A->UPLO;
   memcpy((void*)AP,(void*)v,nn*sizeof(double));
@@ -732,7 +732,7 @@ static int SDualOpsInitialize(struct  DSDPDualMat_Ops* sops){
 #define __FUNCT__ "DSDPLAPACKSUDualMatCreate"
 static int DSDPLAPACKSUDualMatCreate(int n,struct  DSDPDualMat_Ops **sops, void**smat){
   dtrumat *AA;
-  int info,nn,LDA=n;
+  int info=0,nn,LDA=n;
   double *vv;
   DSDPFunctionBegin;
   LDA=SUMatGetLDA(n);
@@ -799,7 +799,7 @@ static int SDualOpsInitializeP(struct  DSDPDualMat_Ops* sops){
 #define __FUNCT__ "DSDPLAPACKSUDualMatCreate"
 static int DSDPLAPACKSUDualMatCreateP(int n,  struct  DSDPDualMat_Ops **sops, void**smat){
   dtrumat *AA;
-  int info,nn,LDA;
+  int info=0,nn,LDA;
   double *vv;
   DSDPFunctionBegin;
   LDA=SUMatGetLDA(n);
@@ -907,7 +907,7 @@ static int DDenseVecVec(void* A, double x[], int n, double *v){
 
 static int DTRUMatEigs(void*AA,double W[],double IIWORK[], int nn1, double *mineig){
   dtrumat* AAA=(dtrumat*) AA;
-  ffinteger info,INFO=0,M,N=AAA->n;
+  ffinteger info=0,INFO=0,M,N=AAA->n;
   ffinteger IL=1,IU=1,LDA=AAA->LDA,LDZ=LDA,LWORK,IFAIL;
   ffinteger *IWORK=(ffinteger*)IIWORK;
   double *AP=AAA->val;
@@ -971,7 +971,7 @@ int DSDPXMatUCreateWithData(int n,double nz[],int nnz,struct  DSDPVMat_Ops* *xop
 #undef __FUNCT__
 #define __FUNCT__ "DSDPXMatUCreate"
 int DSDPXMatUCreate(int n,struct  DSDPVMat_Ops* *xops, void * *xmat){
-  int info,nn=n*n;
+  int info=0,nn=n*n;
   double *vv;
   DSDPFunctionBegin;
   DSDPCALLOC2(&vv,double,nn,&info);DSDPCHKERR(info);
@@ -1014,7 +1014,7 @@ int DSDPCreateDSMatWithArray2(int n,double vv[],int nnz,struct  DSDPDSMat_Ops* *
 #undef __FUNCT__
 #define __FUNCT__ "DSDPCreateXDSMat2"
 int DSDPCreateXDSMat2(int n,struct  DSDPDSMat_Ops* *dsmatops, void**dsmat){
-  int info,nn=n*n;
+  int info=0,nn=n*n;
   double *vv;
   DSDPFunctionBegin;  
   DSDPCALLOC2(&vv,double,nn,&info);DSDPCHKERR(info);
@@ -1038,7 +1038,7 @@ typedef struct {
 #undef __FUNCT__  
 #define __FUNCT__ "CreateDvecumatWData"
 static int CreateDvecumatWdata(int n, double vv[], dvecumat **A){
-  int info,nnz=n*n;
+  int info=0,nnz=n*n;
   dvecumat* V;
   DSDPCALLOC1(&V,dvecumat,&info);DSDPCHKERR(info);
   info=DTRUMatCreateWData(n,n,vv,nnz,&V->AA); DSDPCHKERR(info);
@@ -1298,7 +1298,7 @@ static int DvecumatOpsInitialize(struct  DSDPDataMat_Ops *sops){
 #undef __FUNCT__  
 #define __FUNCT__ "DSDPGetDUmat"
 int DSDPGetDUMat(int n,double *val, struct  DSDPDataMat_Ops**sops, void**smat){ 
-  int info,k;
+  int info=0,k;
   double dtmp;
   dvecumat* A;
   DSDPFunctionBegin;

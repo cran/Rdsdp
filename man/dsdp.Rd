@@ -97,7 +97,6 @@ dsdp(A,b,C,K,OPTIONS=NULL)
 	
     OPTIONS=NULL
     OPTIONS$gaptol=0.000001
-    OPTIONS$save="savesol.dat-s"
     OPTIONS$logsummary=0
     OPTIONS$outputstats=1
 	
