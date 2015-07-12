@@ -73,15 +73,26 @@ sedumi2sdpa <- function(filename,A,b,C,K)
   cat("\n", file=filename, append=TRUE)
   
   # write nBlock
-  cat( 1+length(K$s), file=filename, append=TRUE)
+  nBlock = NULL
+  blkSizes = NULL
+  if(!is.null(K$l) && K$l != 0) 
+  {
+    nBlock = 1+length(K$s)
+    blkSizes = c(-K$l,K$s)
+  }else
+  {
+    nBlock = length(K$s)
+    blkSizes = c(K$s)
+  }
+  cat( nBlock, file=filename, append=TRUE)
   cat("\n", file=filename, append=TRUE)
   
   # write blockStruct
-  cat( c(-K$l,K$s), file=filename, append=TRUE)
+  cat( blkSizes, file=filename, append=TRUE)
   cat("\n", file=filename, append=TRUE)
   
   # write b
-  cat(as(-b, "matrix"), file = filename, append=TRUE)
+  cat(as(b, "matrix"), file = filename, append=TRUE)
   cat("\n", file=filename, append=TRUE)
   
   # write C
@@ -103,7 +114,7 @@ sedumi2sdpa <- function(filename,A,b,C,K)
     nzind = which(blockmat!=0, arr.ind=TRUE)
     if(dim(nzind)[1]>0){
       nzind = nzind[nzind[,"row"]<=nzind[,"col"],]
-	    if(is.null(dim(nzind)) ) nzind = t(as.matrix(nzind,byrow=FALSE))
+      if(is.null(dim(nzind)) ) nzind = t(as.matrix(nzind,byrow=FALSE))
       tmpoutput = cbind(matnum,blocknum,nzind,x=blockmat[nzind])
       outputMat=rbind(outputMat,tmpoutput)
     }
@@ -118,8 +129,11 @@ sedumi2sdpa <- function(filename,A,b,C,K)
     currow = A[matnum,]
     if(!is.null(K$l) && K$l != 0){
       blocknum = blocknum+1;
-      tmpoutput = cbind(matnum, blocknum, row=c(1:K$l), col=c(1:K$l), x=currow[c(1:K$l)])
-      outputMat=rbind(outputMat,tmpoutput)
+      nzind = which(currow[c(1:K$l)]!=0,arr.ind=TRUE)
+      tmpoutput = cbind(matnum, blocknum, row=nzind, col=nzind, x=currow[nzind])
+      if(dim(tmpoutput)[2]==5){
+        outputMat=rbind(outputMat,tmpoutput)
+      }
       curind=curind+K$l;
     }
     for(conesize in K$s){
@@ -139,6 +153,3 @@ sedumi2sdpa <- function(filename,A,b,C,K)
   outputMat[,5]=-outputMat[,5]
   write.table(as.matrix(outputMat), file = filename, append=TRUE,row.names=FALSE,col.names=FALSE)
 }
-
-
-

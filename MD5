@@ -1,6 +1,6 @@
-8231f284027e0b339c6d184f49e19701 *DESCRIPTION
-768ec16490e6945e01924f4490e406f4 *NAMESPACE
-9997f4e4b76291a7fa6e6b02801173ad *R/Rdsdp.R
+a97c23a50aa07d010844de1a2155ec8c *DESCRIPTION
+a1b4d0dfaf5a4336d8880601b9dfdb93 *NAMESPACE
+c03be8a0ce935483e811d01df963ba10 *R/Rdsdp.R
 231556c950e6f00809b0cc8ac24763ad *cleanup
 420c0b90622558256263ffca8da36ef5 *configure
 66f5b254b3a81618d6bb631adf16233f *configure.ac
@@ -116,3 +116,4 @@ d95d95d210eee8be22b5bf9a09581014 *src/dsdp/src/vecmat/vech.c
 6bf93c40211d4df2459f2c94ab4a0b12 *src/dsdp/src/vecmat/zeromat.c
 98215f74d58ce28de5c902e659d5cad0 *tests/test1.R
 4f950c663aaaec960a3378828ddfdc69 *tests/test2.R
+da1e61a217aa5ee4e7c162bb2a4c51a6 *tests/test3.R
