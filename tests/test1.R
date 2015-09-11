@@ -2,7 +2,7 @@
 library(Rdsdp)
 
 	# Sedumi format example
-	K=NULL
+	K=c()
 	K$s=c(2,3)
 	K$l=2
 
@@ -14,7 +14,7 @@ library(Rdsdp)
                          1,0,5),
           	1,0,3,1,1,3,rep(0,9)), 2,15,byrow=TRUE)
 	b <- c(1,2)
+        C=-C
 
     ret = dsdp(A,b,C,K)
-    ret
-
+    stopifnot(all.equal(ret$y,c(-1.0,-0.75),tolerance=1e-05))

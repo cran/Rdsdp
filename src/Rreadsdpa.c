@@ -319,7 +319,7 @@ int rReadSDPAFile(char* data_filename, char *options_filename, double **ysol, in
     DSDPGetY(dsdp, *ysol, *nvars);
     for (i=0; i< (*nvars); i++) 
     {   
-        (*ysol)[i] = -(*ysol)[i];
+        (*ysol)[i] = (*ysol)[i];
     }  
     
     int coneStartIndex = 0;

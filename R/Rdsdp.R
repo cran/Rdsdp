@@ -101,11 +101,14 @@ sedumi2sdpa <- function(filename,A,b,C,K)
   matnum=0;
   blocknum=0;
   curind = 1;
-  currow=C;
+  currow=-C;
   if(!is.null(K$l) && K$l != 0){
     blocknum = blocknum+1;
-    tmpoutput = cbind(matnum, blocknum, row=c(1:K$l), col=c(1:K$l), x=currow[c(1:K$l)])
-    outputMat=rbind(outputMat,tmpoutput)
+    nzind = which(currow[c(1:K$l)]!=0, arr.ind=TRUE)
+    if(length(nzind)>0){
+      tmpoutput = cbind(matnum, blocknum, row=nzind, col=nzind, x=currow[nzind])
+      outputMat=rbind(outputMat,tmpoutput)      
+    }
     curind=curind+K$l;
   }
   for(conesize in K$s){
@@ -130,8 +133,8 @@ sedumi2sdpa <- function(filename,A,b,C,K)
     if(!is.null(K$l) && K$l != 0){
       blocknum = blocknum+1;
       nzind = which(currow[c(1:K$l)]!=0,arr.ind=TRUE)
-      tmpoutput = cbind(matnum, blocknum, row=nzind, col=nzind, x=currow[nzind])
-      if(dim(tmpoutput)[2]==5){
+      if(length(nzind)>0){
+        tmpoutput = cbind(matnum, blocknum, row=nzind, col=nzind, x=currow[nzind])
         outputMat=rbind(outputMat,tmpoutput)
       }
       curind=curind+K$l;
@@ -150,6 +153,6 @@ sedumi2sdpa <- function(filename,A,b,C,K)
       curind=curind+conesize*conesize;
     }
   }
-  outputMat[,5]=-outputMat[,5]
+  # outputMat[,5]=-outputMat[,5]
   write.table(as.matrix(outputMat), file = filename, append=TRUE,row.names=FALSE,col.names=FALSE)
 }

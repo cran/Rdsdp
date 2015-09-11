@@ -2,7 +2,7 @@
 library(Rdsdp)
 
     # Sedumi format example
-    K=NULL
+    K=c()
     K$s=c(3)
     K$l=0
     OPTIONS=NULL
@@ -15,7 +15,7 @@ library(Rdsdp)
   A3 = c(0,0,0, 0,0,1, 0,1,0)
   A4 = -c(1,0,0, 0,1,0, 0,0,1)
   A=rbind(A2,A3,A4)
-  b <- c(0,0,1)
+  b <- -c(0,0,1)
 
   ret = dsdp(A,b,C,K,OPTIONS)
   y = ret$y

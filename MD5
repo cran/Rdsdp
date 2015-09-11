@@ -1,6 +1,6 @@
-a97c23a50aa07d010844de1a2155ec8c *DESCRIPTION
+2514a73d035cfd72f2607db4f32944c1 *DESCRIPTION
 a1b4d0dfaf5a4336d8880601b9dfdb93 *NAMESPACE
-c03be8a0ce935483e811d01df963ba10 *R/Rdsdp.R
+6cdc623935b605f113971f37a6e6bc29 *R/Rdsdp.R
 231556c950e6f00809b0cc8ac24763ad *cleanup
 420c0b90622558256263ffca8da36ef5 *configure
 66f5b254b3a81618d6bb631adf16233f *configure.ac
@@ -14,7 +14,7 @@ b48738fd246e022bf27eec55d2996ef4 *inst/extdata/vibra1.dat-s
 c505dfd59bae5539fd4cfad39ae7bcce *src/Makevars.in
 33866ebcf58ce79c2cd0d12206dfef36 *src/Makevars.win
 eb5d062aa1682c7e94bf2a4d7e4e169c *src/Rdsdp.c
-956c2d4edc69d6e61bef126393287703 *src/Rreadsdpa.c
+2bf85e5f45960cebb11dfc7db3d4d235 *src/Rreadsdpa.c
 0aaa0fd16ed76776abb0638518d79a99 *src/dsdp/Makefile
 c9e50d910de8557dc46cf6908503516e *src/dsdp/Readme
 ef29c0513373a489942beaff1fcc9e68 *src/dsdp/dsdp-license
@@ -114,6 +114,6 @@ e437a7a2ccfbf385a5735f2291f476ba *src/dsdp/src/vecmat/spds.c
 d95d95d210eee8be22b5bf9a09581014 *src/dsdp/src/vecmat/vech.c
 7662524f4844e0e989b0fbae4cdbbe26 *src/dsdp/src/vecmat/vechu.c
 6bf93c40211d4df2459f2c94ab4a0b12 *src/dsdp/src/vecmat/zeromat.c
-98215f74d58ce28de5c902e659d5cad0 *tests/test1.R
-4f950c663aaaec960a3378828ddfdc69 *tests/test2.R
-da1e61a217aa5ee4e7c162bb2a4c51a6 *tests/test3.R
+f192f0bc2a0953d19295515e730e1be1 *tests/test1.R
+439a59a2dfe5b67ad03569d0a1cbc096 *tests/test2.R
+a2d60a75e31d50233ed048bc39df3960 *tests/test3.R
