@@ -1,5 +1,5 @@
 Package: Rdsdp
-Version: 1.0.4
+Version: 1.0.4-1
 Title: R Interface to DSDP Semidefinite Programming Library
 Author: Zhisu Zhu, Yinyu Ye (DSDP by Steve Benson, Yinyu Ye and Xiong Zhang)
 Maintainer: Zhisu Zhu <zhuzhisu@alumni.stanford.edu>
@@ -9,6 +9,6 @@ LazyLoad: yes
 License: GPL-3
 URL: http://www.mcs.anl.gov/hs/software/DSDP
 NeedsCompilation: yes
-Packaged: 2015-09-11 06:04:35 UTC; zhuzhisu
+Packaged: 2016-04-23 15:46:37 UTC; ligges
 Repository: CRAN
-Date/Publication: 2015-09-11 10:05:18
+Date/Publication: 2016-04-23 18:07:51

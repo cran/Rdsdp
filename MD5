@@ -1,4 +1,4 @@
-2514a73d035cfd72f2607db4f32944c1 *DESCRIPTION
+d0a105f4433a1d4eb3b934960b4d5289 *DESCRIPTION
 a1b4d0dfaf5a4336d8880601b9dfdb93 *NAMESPACE
 6cdc623935b605f113971f37a6e6bc29 *R/Rdsdp.R
 231556c950e6f00809b0cc8ac24763ad *cleanup
@@ -24,7 +24,7 @@ b5f8683b18e357ada48adc005c106e38 *src/dsdp/include/dsdpbasictypes.h
 a96f3abee2f88a163d326bd551638e8e *src/dsdp/include/dsdpmem.h
 737520a3da97ba9fe0b5875b3e04af88 *src/dsdp/include/dsdpsys.h
 853de22f5f8c75ceeacd08412ff3d292 *src/dsdp/lib/Makefile
-3840b8e6d7369e77d0f7383690c04404 *src/dsdp/make.include
+ff68311abcdf28906c18386cb6290dee *src/dsdp/make.include
 989b649d2ed0dea488467cf886e16a8c *src/dsdp/src/Makefile
 defd578f3b40cc148380e81ff8c6d7a6 *src/dsdp/src/bounds/Makefile
 f22641fcba0696ae534a307c83df85c0 *src/dsdp/src/bounds/allbounds.c
