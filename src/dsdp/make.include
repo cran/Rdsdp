@@ -7,7 +7,7 @@ DSDPROOT       = ../../
 #   the defaults below should work, although fast BLAS and LAPACK recommended.
 
 # STEP 2: Set the name of the C compiler. 
-CC       = ${CC}
+#CC       = ${CC}
 #CC       = cc 
 #CC       = g++ 
 #CC       = mpicc
@@ -88,7 +88,7 @@ EXECDIR = ${DSDPROOT}/bin/
 # STEP 7  SET Operating system commands 
 # Other build information, archive, remove, move, copy
 ARCH     = ${AR} cr
-RANLIB   = ${RANLIB}
+#RANLIB   = ${RANLIB}
 #RANLIB   = echo
 RM       = rm -f
 MV       = mv
