@@ -149,6 +149,7 @@ int DSDPReadOptions(DSDP dsdp, char filename[]){
   char fargs[2*MAXOPTIONS][STRLENGTH];
   char *fargs2[2*MAXOPTIONS];
   FILE *fp;
+  char* fgets_return_pt;
 
   DSDPFunctionBegin;
 
@@ -158,11 +159,11 @@ int DSDPReadOptions(DSDP dsdp, char filename[]){
   if (fp){
     while(!feof(fp) ){
       if (line>=MAXOPTIONS) break;
-      fgets(thisline,BUFFERSIZ,fp);
+      fgets_return_pt=fgets(thisline,BUFFERSIZ,fp);
       if (sscanf(thisline,"%s %s",doption,dvalue)>=2){
 	if (doption[0]!='%'){
-	  strncpy(fargs[2*line],doption,STRLENGTH-1);
-	  strncpy(fargs[2*line+1],dvalue,STRLENGTH-1);
+	  strncpy(fargs[2*line],doption,STRLENGTH);
+	  strncpy(fargs[2*line+1],dvalue,STRLENGTH);
 	  line++;
 	}
       }

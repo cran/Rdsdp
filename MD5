@@ -1,9 +1,9 @@
-c2848eeae656d1f40cc489cb21c536f7 *DESCRIPTION
-a1b4d0dfaf5a4336d8880601b9dfdb93 *NAMESPACE
+2f10039291309222d7df2124519cbbde *DESCRIPTION
+50a91d1b31c2791589f395af92b56ef0 *NAMESPACE
 6cdc623935b605f113971f37a6e6bc29 *R/Rdsdp.R
 231556c950e6f00809b0cc8ac24763ad *cleanup
-420c0b90622558256263ffca8da36ef5 *configure
-66f5b254b3a81618d6bb631adf16233f *configure.ac
+ff7f00891b890d1852885947ef1f209a *configure
+adee7037a1e7c749eaa617f3e08cee3e *configure.ac
 2270e4a7429b77cfd77b51dd7d54ee6a *inst/extdata/control1.dat-s
 b0ea033ebe8cf84d34f08a4c5cb65dc3 *inst/extdata/mcp100.dat-s
 001abfd93f36b7df766a1270442dc800 *inst/extdata/truss1.dat-s
@@ -13,8 +13,8 @@ b48738fd246e022bf27eec55d2996ef4 *inst/extdata/vibra1.dat-s
 863b82f8df3c5b4dec13d0d3db1bce1e *man/dsdp.Rd
 c505dfd59bae5539fd4cfad39ae7bcce *src/Makevars.in
 33866ebcf58ce79c2cd0d12206dfef36 *src/Makevars.win
-eb5d062aa1682c7e94bf2a4d7e4e169c *src/Rdsdp.c
-2bf85e5f45960cebb11dfc7db3d4d235 *src/Rreadsdpa.c
+3fba3b6d030b538f23e13dbd5a021a3c *src/Rdsdp.c
+45c5ededc6c5cf4b7ee9da455619cc73 *src/Rreadsdpa.c
 0aaa0fd16ed76776abb0638518d79a99 *src/dsdp/Makefile
 c9e50d910de8557dc46cf6908503516e *src/dsdp/Readme
 ef29c0513373a489942beaff1fcc9e68 *src/dsdp/dsdp-license
@@ -77,7 +77,7 @@ a01dbb64fa39334f577997db07bd3428 *src/dsdp/src/solver/dsdpschurmat.h
 f1e60281cc9d5586a0b212a5d43e6888 *src/dsdp/src/solver/dsdpschurmat_impl.h
 f84ef745ebaa905c54f9752c54e3b9f9 *src/dsdp/src/solver/dsdpschurmatadd.c
 f3c04d7764d252226f58632bf90a0560 *src/dsdp/src/solver/dsdpsetdata.c
-63aa66c9f0c523dc8cf31b16b614e200 *src/dsdp/src/solver/dsdpsetoptions.c
+d10c3530f89da3ad8cfcdefe58fc49a3 *src/dsdp/src/solver/dsdpsetoptions.c
 2d1b841662a8ba688a3b0c65dd7683ef *src/dsdp/src/solver/dsdpsetup.c
 a72b806073e34dfc90263ec5ce82acde *src/dsdp/src/solver/dsdpvec.h
 9630038fb4f55792bbec737ea7a14239 *src/dsdp/src/solver/dsdpx.c

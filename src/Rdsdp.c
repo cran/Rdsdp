@@ -8,6 +8,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <dsdp5.h>
+#include <R_ext/Rdynload.h>
 
 SEXP int_vector_dsdp2R(int, int*);
 SEXP double_vector_dsdp2R(int, double*);
@@ -40,19 +41,19 @@ SEXP dsdp(SEXP data_filename_p, SEXP options_filename_p)
    * Get the results
    */
   
-  X_p = double_vector_dsdp2R(nXvars,X);
+  X_p = PROTECT(double_vector_dsdp2R(nXvars,X));
   DSDPFREE(&X, &info);
   
   
   /* Copy y */
-  y_p = double_vector_dsdp2R(nvars, y);
+  y_p = PROTECT(double_vector_dsdp2R(nvars, y));
   DSDPFREE(&y, &info);
 
   /* Copy STATS */
-  STATS_p = double_vector_dsdp2R(nstats, STATS);
+  STATS_p = PROTECT(double_vector_dsdp2R(nstats, STATS));
   DSDPFREE(&STATS, &info);
 
-  PROTECT(ret = allocVector(VECSXP,3));
+  ret = PROTECT(allocVector(VECSXP,3));
   SET_VECTOR_ELT(ret,0,X_p);
   SET_VECTOR_ELT(ret,1,y_p);
   SET_VECTOR_ELT(ret,2,STATS_p);
@@ -67,7 +68,7 @@ SEXP int_vector_dsdp2R(int n, int *y)
   int i;
   int *intvec;
 
-  PROTECT(ret = allocVector(INTSXP,n));
+  ret = allocVector(INTSXP,n);
   intvec = INTEGER(ret);
   for (i=0; i<n; i++)
     intvec[i] = y[i];
@@ -80,9 +81,16 @@ SEXP double_vector_dsdp2R(int n, double *y)
   int i;
   double *dblvec;
 
-  PROTECT(ret = allocVector(REALSXP,n));
+  ret = allocVector(REALSXP,n);
   dblvec = REAL(ret);
   for (i=0; i<n; i++)
     dblvec[i] = y[i];
   return ret;
 }
+
+// RegisteringDynamic Symbols
+void R_init_Rdsdp(DllInfo* info) {
+  R_registerRoutines(info, NULL, NULL, NULL, NULL);
+  R_useDynamicSymbols(info, TRUE);
+}
+

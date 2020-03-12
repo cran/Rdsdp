@@ -485,6 +485,8 @@ int ReadSDPA2(char *filename, DSDPData*ddd){
   int np=0,nblocks;
   int nargs,nonzero;
   double val;
+  int fscanf_return_int;
+  char* fgets_return_pt;
   
   fp=fopen(filename,"r");
   if (!fp){
@@ -493,7 +495,7 @@ int ReadSDPA2(char *filename, DSDPData*ddd){
 
   /* Read comments */
   while(!feof(fp) && (thisline[0] == '*' || thisline[0] == '"') ){
-    fgets(thisline,BUFFERSIZ,fp); line++;
+    fgets_return_pt=fgets(thisline,BUFFERSIZ,fp); line++;
   }
   /* Read number of constraints */
   if (sscanf(thisline,"%d",&m)<1){
@@ -501,7 +503,7 @@ int ReadSDPA2(char *filename, DSDPData*ddd){
     return(1);
   }
   /* Read number of blocks */
-  fgets(thisline,BUFFERSIZ,fp); line++;
+  fgets_return_pt=fgets(thisline,BUFFERSIZ,fp); line++;
   if (sscanf(thisline,"%d",&nblocks)!=1){
     Rprintf("Error: line %d.  Number of blocks not given.\n",line);
     return(1);
@@ -525,7 +527,7 @@ int ReadSDPA2(char *filename, DSDPData*ddd){
     else{ Rprintf("Error block sizes, line %d",line); return(1);}
   }
   if (ddd->blocksizes[nblocks-1]==0) nblocks--;
-  fgets(thisline,BUFFERSIZ,fp); 
+  fgets_return_pt=fgets(thisline,BUFFERSIZ,fp);
   
   /* Read objective vector */
   DSDPCALLOC2(&ddd->y0,double,m,&info);
@@ -537,7 +539,7 @@ int ReadSDPA2(char *filename, DSDPData*ddd){
       continue;
     }
     while (fscanf(fp,"%lg",&val)!=1){
-      fscanf(fp,"%c",&ctmp);
+      fscanf_return_int=fscanf(fp,"%c",&ctmp);
       if (ctmp=='\n'){
 	Rprintf("Constraints: %d, Blocks: %d\n",m,nblocks);
 	Rprintf("Error reading objective, line %d, i=%d \n",line,i); return 1;
@@ -546,18 +548,18 @@ int ReadSDPA2(char *filename, DSDPData*ddd){
     ddd->dobj[i]=val;
   }
 
-  fgets(thisline,BUFFERSIZ,fp); 
+  fgets_return_pt=fgets(thisline,BUFFERSIZ,fp);
   tline=line;
 
   fseek(fp,0,SEEK_SET);
   line=0;
-  for (i=0;i<tline;i++){ctmp='*'; while (ctmp!='\n'){ fscanf(fp,"%c",&ctmp);} line++;}
+  for (i=0;i<tline;i++){ctmp='*'; while (ctmp!='\n'){ fscanf_return_int=fscanf(fp,"%c",&ctmp);} line++;}
 
   nargs=5;  nonzero=0;
   while(!feof(fp)){
     thisline[0]='\0';
     nmat=-1; nblk=-1; row=-1; col=-1; val=0.0;
-    fgets(thisline,BUFFERSIZ,fp); line++;
+    fgets_return_pt=fgets(thisline,BUFFERSIZ,fp); line++;
     info = Parseline(thisline,&nmat,&nblk,&row,&col,&val,&nargs); 
     if (!feof(fp)&&nargs!=5&&nargs>0){
       Rprintf("Error: line %d \n%s\n",line,thisline);return 1;}
@@ -599,13 +601,13 @@ int ReadSDPA2(char *filename, DSDPData*ddd){
 
   fseek(fp,0,SEEK_SET);
   line=0;
-  for (i=0;i<tline;i++){ctmp='*'; while (ctmp!='\n') fscanf(fp,"%c",&ctmp); line++;}
+  for (i=0;i<tline;i++){ctmp='*'; while (ctmp!='\n') fscanf_return_int=fscanf(fp,"%c",&ctmp); line++;}
 
   nargs=5;k=0;
   while(!feof(fp) /* && nargs==5 */){  
     thisline[0]='\0';
-    fgets(thisline,BUFFERSIZ,fp);
-    if (k==0){strncpy(refline,thisline,BUFFERSIZ-1); }
+    fgets_return_pt=fgets(thisline,BUFFERSIZ,fp);
+    if (k==0){strncpy(refline,thisline,BUFFERSIZ); }
     info = Parseline(thisline,&nmat,&nblk,&row,&col,&val,&nargs); 
     if (!feof(fp)&&nargs!=5&&nargs<0){
       /* if (k>=nonzero && !feof(fp) ){ */
@@ -1016,6 +1018,7 @@ static int DSDPReadOptions2(DSDP dsdp, char filename[], int* printlevel, int* lo
   char fargs[2*MAXOPTIONS][STRLENGTH];
   char *fargs2[2*MAXOPTIONS];
   FILE *fp;
+  char* fgets_return_pt;
 
   DSDPFunctionBegin;
 
@@ -1025,7 +1028,7 @@ static int DSDPReadOptions2(DSDP dsdp, char filename[], int* printlevel, int* lo
   if (fp){
     while(!feof(fp) ){
       if (line>=MAXOPTIONS) break;
-      fgets(thisline,BUFFERSIZ,fp);
+      fgets_return_pt=fgets(thisline,BUFFERSIZ,fp);
       if (sscanf(thisline,"%s %s",doption,dvalue)>=2){
         if (doption[0]!='%'){
           if(strncmp(doption,"-print",6)==0){
@@ -1038,8 +1041,8 @@ static int DSDPReadOptions2(DSDP dsdp, char filename[], int* printlevel, int* lo
           }else if(strncmp(doption,"-outputstats",10)==0){
              *outputstats=atoi(dvalue);
           }else{
-            strncpy(fargs[2*line],doption,STRLENGTH-1);
-            strncpy(fargs[2*line+1],dvalue,STRLENGTH-1);
+            strncpy(fargs[2*line],doption,STRLENGTH);
+            strncpy(fargs[2*line+1],dvalue,STRLENGTH);
             line++;
           }
         }
