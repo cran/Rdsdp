@@ -77,7 +77,7 @@ dsdp(A,b,C,K,OPTIONS=NULL)
   \itemize{
 	\item Steven J. Benson and Yinyu Ye:\cr
       \emph{{DSDP5} User Guide --- Software for Semidefinite Programming} Technical Report ANL/MCS-TM-277, 2005\cr
-      \url{http://www.mcs.anl.gov/hs/software/DSDP/DSDP5-Matlab-UserGuide.pdf}
+      \url{https://www.mcs.anl.gov/hs/software/DSDP/DSDP5-Matlab-UserGuide.pdf}
 	}
 }
 

@@ -31,7 +31,7 @@ find solutions (\eqn{X}, \eqn{y}) to linear and semidefinite optimization proble
 
 \references{
   \itemize{
-	\item \url{http://www.mcs.anl.gov/hs/software/DSDP/}
+	\item \url{https://www.mcs.anl.gov/hs/software/DSDP/}
 	\item Steven J. Benson and Yinyu Ye:\cr
       \emph{Algorithm 875: DSDP5 software for semidefinite programming} ACM Transactions on Mathematical Software (TOMS)  34(3), 2008\cr
       \url{http://web.stanford.edu/~yyye/DSDP5-Paper.pdf}

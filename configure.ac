@@ -11,7 +11,7 @@ dnl 3) If none of these are given the included DSDP code is built and linked
 dnl
 dnl Compiler flags for dsdp can be given using --with-dsdp-cflags
 
-AC_INIT([Rdsdp], 0.1.1)
+AC_INIT([Rdsdp],[0.1.1])
 
 FOUND_ALL=""
 
@@ -96,7 +96,8 @@ AC_SUBST(PKG_CFLAGS)
 AC_SUBST(PKG_CPPFLAGS)
 AC_SUBST(PKG_LIBS)
 AC_SUBST(DSDP_TS)
-AC_OUTPUT(src/Makevars)
+AC_CONFIG_FILES([src/Makevars])
+AC_OUTPUT
 
 exit 0
 
