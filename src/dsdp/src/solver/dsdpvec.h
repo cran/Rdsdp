@@ -27,14 +27,14 @@ typedef struct DSDPVec_C DSDPVec;
 #define DSDPVecGetArray(a,b)              0;{ *(b)=((a).val); }
 #define DSDPVecRestoreArray(a,b)          0;{ *(b)=0; }
 #define DSDPVecGetSize(a,b)               0;{ *(b)=((a).dim); }
-#define DSDPVecAddElement(a,b,c)          0;{ if (c){((a).val[b])+=(c);}  }
+#define DSDPVecAddElement(a,b,c)          0;{ if ((c)!=0){((a).val[b])+=(c);}  }
 #define DSDPVecSetElement(a,b,c)          0;{  {((a).val[b])=(c); } }
 #define DSDPVecGetElement(a,b,c)          0;{ *(c)=((a).val[b]); }
 #define DSDPVecSetR(a,b)                  0;{  {((a).val[(a).dim-1])=(b); } }
-#define DSDPVecAddR(a,b)                  0;{  if(b){((a).val[(a).dim-1])+=(b); } }
+#define DSDPVecAddR(a,b)                  0;{  if((b)!=0){((a).val[(a).dim-1])+=(b); } }
 #define DSDPVecGetR(a,b)                  0;{ *(b)=((a).val[(a).dim-1]); }
 #define DSDPVecSetC(a,b)                  0;{  {((a).val[0])=(b); } }
-#define DSDPVecAddC(a,b)                  0;{  if(b){((a).val[0])+=(b); } }
+#define DSDPVecAddC(a,b)                  0;{  if((b)!=0){((a).val[0])+=(b); } }
 #define DSDPVecGetC(a,b)                  0;{ *(b)=((a).val[0]); }
 #define DSDPVecCreateWArray(a,b,c)        0;{ (*(a)).val=(b); (*(a)).dim=(c);}
 /*

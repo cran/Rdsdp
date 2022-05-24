@@ -45,7 +45,7 @@ static int DSDPRHS( void *dspcone, double mu, DSDPVec vrow,DSDPVec vrhs1,DSDPVec
   if (K->dualr ){
     sr=-mu/(K->dualr);
     info=DSDPVecGetR(vrow,&rr);DSDPCHKERR(info);
-    info=DSDPVecAddR(vrhs2,rr*sr);DSDPCHKERR(info);
+    info=DSDPVecAddR(vrhs2,(rr*sr));DSDPCHKERR(info);
   }
   DSDPFunctionReturn(0);
 }
