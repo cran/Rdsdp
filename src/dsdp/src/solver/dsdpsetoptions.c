@@ -277,7 +277,7 @@ static char dsdpoptions[]="\
 \sa DSDPView()
 \ingroup DSDPSolver
  */
-int DSDPPrintOptions(){
+int DSDPPrintOptions(void){
   DSDPFunctionBegin;
   printf("%s",dsdpoptions); 
   DSDPFunctionReturn(0);

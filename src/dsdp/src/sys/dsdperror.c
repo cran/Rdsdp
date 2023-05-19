@@ -126,7 +126,7 @@ int DSDPFFree(void** mmem){
   DSDPFunctionReturn(0);
 }
 
-void DSDPMemoryLog(){
+void DSDPMemoryLog(void){
   int j;
   DSDPFunctionBegin;
   for (j=0;j<DSDPMEMMAX;j++){

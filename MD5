@@ -1,4 +1,4 @@
-4c97d535f544a7104e016ea50a7bbb4e *DESCRIPTION
+09fc4919a7f118b0ea039c4baad31c1c *DESCRIPTION
 50a91d1b31c2791589f395af92b56ef0 *NAMESPACE
 6cdc623935b605f113971f37a6e6bc29 *R/Rdsdp.R
 231556c950e6f00809b0cc8ac24763ad *cleanup
@@ -18,7 +18,7 @@ c505dfd59bae5539fd4cfad39ae7bcce *src/Makevars.in
 0aaa0fd16ed76776abb0638518d79a99 *src/dsdp/Makefile
 c9e50d910de8557dc46cf6908503516e *src/dsdp/Readme
 ef29c0513373a489942beaff1fcc9e68 *src/dsdp/dsdp-license
-aea05fcd4522af06fb2ca6b0955f7b6c *src/dsdp/include/dsdp5.h
+20725c7808f6c93e2c239833f71a5864 *src/dsdp/include/dsdp5.h
 b5f8683b18e357ada48adc005c106e38 *src/dsdp/include/dsdpbasictypes.h
 0d2e1b1678ab0a6b0a4235d8f20007b3 *src/dsdp/include/dsdplapack.h
 a96f3abee2f88a163d326bd551638e8e *src/dsdp/include/dsdpmem.h
@@ -68,7 +68,7 @@ dbcc283beaf6f0c4c37fe6bc4e4b5f3e *src/dsdp/src/solver/dsdpcg.h
 e3e0baa046bdf8d7df342ddc53e07d25 *src/dsdp/src/solver/dsdpcone_impl.h
 3164ce4019d1b96f3e5450266be559b7 *src/dsdp/src/solver/dsdpconverge.c
 56b1027b284385f073ea3e98282ccde6 *src/dsdp/src/solver/dsdpconverge.h
-d93c71834eea63bfdd2de9ddbc66392f *src/dsdp/src/solver/dsdpcops.c
+99cf4744965863577792023bd3153bba *src/dsdp/src/solver/dsdpcops.c
 c98756bbd4d5d845e3a28e9ea7fd6be4 *src/dsdp/src/solver/dsdpobjcone.c
 aece32f6445258daca24b34bdcf0fed7 *src/dsdp/src/solver/dsdpprintout.c
 4c9a2ce3aa9285559bbd011998e4fa5a *src/dsdp/src/solver/dsdprescone.c
@@ -77,14 +77,14 @@ a01dbb64fa39334f577997db07bd3428 *src/dsdp/src/solver/dsdpschurmat.h
 f1e60281cc9d5586a0b212a5d43e6888 *src/dsdp/src/solver/dsdpschurmat_impl.h
 f84ef745ebaa905c54f9752c54e3b9f9 *src/dsdp/src/solver/dsdpschurmatadd.c
 f3c04d7764d252226f58632bf90a0560 *src/dsdp/src/solver/dsdpsetdata.c
-d10c3530f89da3ad8cfcdefe58fc49a3 *src/dsdp/src/solver/dsdpsetoptions.c
+4f064631c64e3b25c8aab9ccb98545c8 *src/dsdp/src/solver/dsdpsetoptions.c
 2d1b841662a8ba688a3b0c65dd7683ef *src/dsdp/src/solver/dsdpsetup.c
 d3d0afc5146b57c082240e27bb094449 *src/dsdp/src/solver/dsdpvec.h
 9630038fb4f55792bbec737ea7a14239 *src/dsdp/src/solver/dsdpx.c
 89bf08e62a08f2dd208a8bde4b1b8a51 *src/dsdp/src/solver/dualalg.c
 118dc9474cd506c1411ba722ae8fdc37 *src/dsdp/src/solver/dualimpl.c
 12764ed68bf23cf132b0aa036034efa7 *src/dsdp/src/sys/Makefile
-dbdec143b6bd7ad36a433463f9de4731 *src/dsdp/src/sys/dsdperror.c
+acf098df1b81fdf66969118509db9820 *src/dsdp/src/sys/dsdperror.c
 16c8d5249abc32dcf73e4f07a5bd4064 *src/dsdp/src/sys/dsdplog.c
 2fdd4631a97494c0d267c4196eaf5abc *src/dsdp/src/sys/dsdploginfo.c
 b6f7f5fbe2b20ec2db9fd8dbe266b894 *src/dsdp/src/sys/dsdptime.c
@@ -100,9 +100,9 @@ d0b1ee12cc340750e0b130f2d4f4bccd *src/dsdp/src/vecmat/diag.c
 3b73826f60f898b10a430b69d2f58d18 *src/dsdp/src/vecmat/numchol.h
 fa79ae0542fae0d0603dda86a12ebc1d *src/dsdp/src/vecmat/onemat.c
 6d1bf756c4d2716fe83e3a904139be7c *src/dsdp/src/vecmat/rmmat.c
-6f929d9f173acd035c06fb31d85c3cb4 *src/dsdp/src/vecmat/sdpalloc.c
+054fc3eaba596d64b87b8f49438dfae6 *src/dsdp/src/vecmat/sdpalloc.c
 e1f141693834385e755dd1166f31d4e0 *src/dsdp/src/vecmat/sdpdvct.c
-1a3d0474fdf678c1a0bb9d4e6065e093 *src/dsdp/src/vecmat/sdpexit.c
+bac99b1a39cf596f2081bd83717784bb *src/dsdp/src/vecmat/sdpexit.c
 75ba479b21a04c022493ecde7f2471e9 *src/dsdp/src/vecmat/sdpfun.h
 2b380cc547d2187a767e8dc4ca109065 *src/dsdp/src/vecmat/sdpmatx.c
 1e593b81d7e1e24f5cb5c04eb6f1ca88 *src/dsdp/src/vecmat/sdpnfac.c

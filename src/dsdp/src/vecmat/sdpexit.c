@@ -1,7 +1,7 @@
 #include "numchol.h"
 #include <string.h>
 
-void ShutDown(){
+void ShutDown(void){
 
   /*   sdpdat* sdt = sdat; */
   printf("\n Shutdown --  ");

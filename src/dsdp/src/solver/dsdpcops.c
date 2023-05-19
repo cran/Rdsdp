@@ -17,7 +17,7 @@ int DSDPIdentifySchurColumns(DSDP,int, int*, int*, int);
 
 #undef __FUNCT__  
 #define __FUNCT__ "DSDPZeroConeEvents"
-static int DSDPZeroConeEvents(){
+static int DSDPZeroConeEvents(void){
   DSDPFunctionBegin;
   ConeSetup=0;ConeComputeS=0;ConeComputeSS=0;ConeComputeH=0;ConeHMultiplyAdd=0;ConeMaxPStep=0;ConeMaxDStep=0;ConePotential=0;ConeComputeX=0;ConeView=0;ConeDestroy=0;ConeXEigs=0;ConeRHS=0;ConeInvertS=0;
   DSDPFunctionReturn(0);
@@ -25,7 +25,7 @@ static int DSDPZeroConeEvents(){
 
 #undef __FUNCT__  
 #define __FUNCT__ "DSDPRegisterConeEvents"
-static int DSDPRegisterConeEvents(){
+static int DSDPRegisterConeEvents(void){
 
   DSDPFunctionBegin;
   DSDPEventLogRegister("Cone Setup 1&2",&ConeSetup);

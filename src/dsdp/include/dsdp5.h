@@ -203,7 +203,7 @@ extern int DSDPSetFixedVariable(DSDP,int,double);
 extern int DSDPSetFixedVariables(DSDP,double[],double[],double[],int);
 extern int DSDPGetFixedYX(DSDP,int,double*);
 extern int DSDPView(DSDP);
-extern int DSDPPrintOptions();
+extern int DSDPPrintOptions(void);
 extern int DSDPPrintData(DSDP,SDPCone,LPCone);
 extern int DSDPPrintSolution(FILE*,DSDP,SDPCone, LPCone);
 extern int DSDPSetOptions(DSDP,char*[], int);

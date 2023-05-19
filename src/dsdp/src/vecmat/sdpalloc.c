@@ -1,7 +1,7 @@
 #include "numchol.h"
 
 int    iSum(int,int*);
-void ShutDown();
+void ShutDown(void);
 int ExitProc(int,char *);
 
 int iAlloc(int  len,
