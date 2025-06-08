@@ -719,11 +719,11 @@ int Mat4View(chfac *sf){
 	      sf->usub+sf->ujbeg[i],
 	      sf->perm);
     v[i]=sf->diag[sf->invp[i]];
-    printf("Row %d, ",i);
+    dsdp_printf("Row %d, ",i);
     for (j=0;j<n;j++){
-      if (v[j]!=0) printf(" %d: %4.4e ",j,v[j]);
+      if (v[j]!=0) dsdp_printf(" %d: %4.4e ",j,v[j]);
     }
-    printf("\n");
+    dsdp_printf("\n");
   }
 
   return 0;
@@ -778,7 +778,7 @@ int MatSetValue4(chfac *cl, int row,int col,double val, int setmode){
   int insertmode=1,addmode=2;
 
   if (row<0 || col<0 || row>=cl->n || col>=cl->n){
-    printf("CHol set Value error: Row: %d, COl: %d \n",row,col);
+    dsdp_printf("CHol set Value error: Row: %d, COl: %d \n",row,col);
     return 1;
   }
 

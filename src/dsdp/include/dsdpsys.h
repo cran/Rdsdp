@@ -10,6 +10,7 @@
 #include <math.h>
 #include <string.h>
 #include <float.h>
+#include "dsdp_io.h"
 
 /* Define some macros for error checking */
 #ifdef __FUNCT__
@@ -76,11 +77,11 @@ extern int DSDPEventLogInitialize(void);
 #include "dsdpmem.h"
 
 #ifndef DSDPPrintf
-#define DSDPPrintf printf
+#define DSDPPrintf dsdp_printf
 #endif
 
 #ifndef DSDPErrorPrintf
-#define DSDPErrorPrintf printf
+#define DSDPErrorPrintf dsdp_printf
 #endif
 
 #define DSDPLogInfo DSDPLogFInfo

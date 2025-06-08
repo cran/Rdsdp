@@ -227,10 +227,10 @@ static int DTPUMatView(void* AA){
   double *val=M->val;
   for (i=0; i<M->n; i++){
     for (j=0; j<=i; j++){
-      printf(" %9.2e",val[kk]);
+      dsdp_printf(" %9.2e",val[kk]);
       kk++;
     }
-    printf("\n");
+    dsdp_printf("\n");
   }
   return 0;
 }
@@ -813,10 +813,10 @@ static int DvechmatView(void* AA){
   double *val=M->val;
   for (i=0; i<M->n; i++){
     for (j=0; j<=i; j++){
-      printf(" %4.2e",A->alpha*val[kk]);
+      dsdp_printf(" %4.2e",A->alpha*val[kk]);
       kk++;
     }
-    printf(" \n");
+    dsdp_printf(" \n");
   }
   return 0;
 }

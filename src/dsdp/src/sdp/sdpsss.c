@@ -175,7 +175,7 @@ static int DSDPCreateS1(DSDPBlockData *ADATA, int trank, DSDPVec WY, DSDPVMat T,
   DSDPLogInfo(0,19,"Compute Sparsity\n");
   info = CountNonzeros(ADATA, m, rnnz, iworkm, n, &dsnnz,&snnz); DSDPCHKERR(info);
   nnz=snnz;
-  /* printf("Nonzeros: %d %d of %d\n",dsnnz,snnz,n*(n-1)/2); */
+  /* dsdp_printf("Nonzeros: %d %d of %d\n",dsnnz,snnz,n*(n-1)/2); */
   /* TT and DS could share memory */
   info=DSDPCreateDS(ADATA,T,iworkm,m,n,dsnnz,rnnz,tnnz,DS);DSDPCHKERR(info);
 
@@ -188,7 +188,7 @@ static int DSDPCreateS1(DSDPBlockData *ADATA, int trank, DSDPVec WY, DSDPVMat T,
     info = CreateS1c(ADATA, iworkm, m, n, tnnz, rnnz, cols); DSDPCHKERR(info);
     info=DSDPSparseDualMatCreate(n,rnnz,cols,trank,'P',&sfnnz,&sops1,&smat1,&sops2,&smat2); DSDPCHKERR(info);
     info=DSDPVMatRestoreArray(T,&pss,&n1); DSDPCHKERR(info);
-    /*   printf("NNZ: %d %d of %d\n",2*snnz+n,sfnnz*2+n,n*n); */
+    /*   dsdp_printf("NNZ: %d %d of %d\n",2*snnz+n,sfnnz*2+n,n*n); */
     DSDPLogInfo(0,19,"Count %d of %d nonzeros: Using Sparse S matrix\n",nnz,n*(n-1)/2);
     DSDPLogInfo(0,19,"Total rank of block: %d, n= %d\n",trank,n);
   } else if (n>20 && dsdpuselapack){
@@ -263,7 +263,7 @@ static int DSDPCreateS2(DSDPBlockData *ADATA, int trank, DSDPVec WY, DSDPVMat T,
   DSDPLogInfo(0,19,"Compute Sparsity\n");
   info = CountNonzeros(ADATA, m, rnnz, iworkm, n, &dsnnz,&snnz); DSDPCHKERR(info);
   nnz=snnz;
-  /* printf("Nonzeros: %d %d of %d\n",dsnnz,snnz,n*(n-1)/2); */
+  /* dsdp_printf("Nonzeros: %d %d of %d\n",dsnnz,snnz,n*(n-1)/2); */
   /* TT and DS could share memory */
   info=DSDPCreateDS2(ADATA,T,iworkm,m,n,dsnnz,rnnz,tnnz,DS);DSDPCHKERR(info);
 

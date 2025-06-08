@@ -679,14 +679,14 @@ void OdProc(order *od,
     XtLeast(elist);
     
     if (!XtGet(elist,&y,&mindeg)) {
-      printf("\n No new nodes e=%d  n=%d",e,n);
-      printf(" Node status: ");
+      dsdp_printf("\n No new nodes e=%d  n=%d",e,n);
+      dsdp_printf(" Node status: ");
       
       for(i=0; i<n; ++i)
         if (node_status[i]==1)
-          printf("A\n");
+          dsdp_printf("A\n");
         else if (node_status[i]==2)
-          printf("\n O%d: rlen=%d oinfo=%d\n",
+          dsdp_printf("\n O%d: rlen=%d oinfo=%d\n",
                  i,isize[i],oinfo[i]);
       
       ExitProc(SysError,NULL);

@@ -15,15 +15,6 @@ AC_INIT([Rdsdp],[0.1.1])
 
 FOUND_ALL=""
 
-dnl Check if global variables are already set, if so we are done
-if test [-n "$PKG_CFLAGS" -a -n "$PKG_CPPFLAGS" -a -n "$PKG_LIBS"] ; then
-    FOUND_ALL="yes"
-else
-    if test [-n "$PKG_CFLAGS" -o -n "$PKG_CPPFLAGS" -o -n "$PKG_LIBS"] ; then
-	AC_MSG_ERROR([All three of PKG_CFLAGS PKG_CPPFLAGS and PKG_LIBS must be given together])
-    fi
-fi
-
 dnl get arguments
 AC_ARG_WITH([dsdp-cflags],
     [AS_HELP_STRING([--with-dsdp-cflags],[compiler flags for dsdp])],
@@ -35,7 +26,7 @@ AC_ARG_WITH([dsdp-dir],
     DSDP_DIR=$withval,
     DSDP_DIR="")
 
-if test [-z "$FOUND_ALL" -a -n "$DSDP_DIR"] ; then
+if [ -z "$FOUND_ALL" ] && [ -n "$DSDP_DIR" ] ; then
     if test [! -d "$DSDP_DIR"] ; then
 	AC_MSG_ERROR([DSDP installation directory $DSDP_DIR does not exist])
     fi
@@ -74,8 +65,11 @@ FLIBS=`"${R_HOME}/bin/R" CMD config FLIBS`
 AC_PROG_CC
 AC_PROG_CPP
 
+R_INCLUDE_DIR="${R_HOME}/include"
+echo "R_INCLUDE_DIR=${R_INCLUDE_DIR}"
+
 PKG_LIBS="${PKG_LIBS} -ldsdp ${LAPACK_LIBS} ${BLAS_LIBS} ${FLIBS} -lm"
-PKG_CFLAGS="-DNOSHORTS ${DSDP_CFLAGS}"
+PKG_CFLAGS="-DNOSHORTS -I${R_INCLUDE_DIR} ${DSDP_CFLAGS}"
 
 dnl if given by user, check header and library
 if test [-n "$FOUND_ALL"] ; then
@@ -84,7 +78,7 @@ if test [-n "$FOUND_ALL"] ; then
     CPPFLAGS="${CPPFLAGS} ${PKG_CPPFLAGS}"
     
     AC_CHECK_HEADER(declarations.h)
-    if test "${ac_cv_header_declarations_h}" == no; then
+    if test "${ac_cv_header_declarations_h}" = no; then
 	AC_MSG_ERROR([DSDP header declarations.h not found in provided location])
     fi
     

@@ -249,7 +249,7 @@ static void LocDplRow(int nrow,
     ilist[isze]=n;
     
     if (i==n)
-      exit(0);
+      dsdp_exit(0);
     
     rnew=n;
     if (ilink[i]==n)

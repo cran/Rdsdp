@@ -71,7 +71,7 @@ static int SUMatGetLDA(int n){
     while (nlda%8!=0){ nlda++;}
   }
   /*
-  printf("LDA: %d %d %d \n",n,nlda,(int)sizeof(double));
+  dsdp_printf("LDA: %d %d %d \n",n,nlda,(int)sizeof(double));
   */
   return (nlda);
 }
@@ -108,8 +108,8 @@ int DSDPGetEigs(double A[],int n, double AA[], int nn0, long int IA[], int nn1,
   LDZ=DSDPMax(1,n); 
   if ( n2/2.5 > n || (ni<10*n+1) || (nd<26*n+1) || (nn0 < n*LDA) || (nn1<LDZ*n) ){
     /*
-    printf("n: %d, ni: %d, nd: %d\n",n,ni/n,nd/n);
-    printf("SLOW VERSION\n");
+    dsdp_printf("n: %d, ni: %d, nd: %d\n",n,ni/n,nd/n);
+    dsdp_printf("SLOW VERSION\n");
     */
     dsyev(&JOBZ,&UPLO,&N,A,&LDA,W,WORK,&LWORK,&INFO);
   } else {
@@ -125,17 +125,17 @@ int DSDPGetEigs(double A[],int n, double AA[], int nn0, long int IA[], int nn1,
       DTRUMatView((void*)M);
     }
     /*
-      printf("N: %d N2: %d , ",n,n2);
+      dsdp_printf("N: %d N2: %d , ",n,n2);
     */
     /*
     LWORK=26*n; LIWORK=10*n;
     */
     /*
-    printf("JOBZ: %c, RANGE: %c, UPLO: %c, N: %d LDA: %d \n",
+    dsdp_printf("JOBZ: %c, RANGE: %c, UPLO: %c, N: %d LDA: %d \n",
 	   JOBZ,RANGE,UPLO, N,LDA);
-    printf("VL: %4.4e, VU: %4.4e, IL: %d, IU: %d, ABSTOL: %4.4e, LDZ: %d\n",
+    dsdp_printf("VL: %4.4e, VU: %4.4e, IL: %d, IU: %d, ABSTOL: %4.4e, LDZ: %d\n",
 	   VL,VU,IL,IU,ABSTOL,LDZ);
-    printf("LWORK: %d, LIWORK: %d\n",LWORK,LIWORK);
+    dsdp_printf("LWORK: %d, LIWORK: %d\n",LWORK,LIWORK);
     */
 
       dsyevr(&JOBZ,&RANGE,&UPLO,&N,A,&LDA,&VL,&VU,&IL,&IU,&ABSTOL,&M,W,Z,&LDZ,ISUPPZ,WORK,&LWORK,IWORK,&LIWORK,&INFO);
@@ -327,12 +327,12 @@ static int DTRUMatView(void* AA){
   ffinteger LDA=M->LDA;
   for (i=0; i<M->n; i++){
     for (j=0; j<=i; j++){
-      printf(" %9.2e",val[i*LDA+j]);
+      dsdp_printf(" %9.2e",val[i*LDA+j]);
     }
     for (j=i+1; j<M->LDA; j++){
-      printf(" %9.1e",val[i*LDA+j]);
+      dsdp_printf(" %9.1e",val[i*LDA+j]);
     }
-    printf("\n");
+    dsdp_printf("\n");
   }
   return 0;
 }
@@ -344,12 +344,12 @@ static int DTRUMatView2(void* AA){
   ffinteger LDA=M->LDA;
   for (i=0; i<M->n; i++){
     for (j=0; j<=i; j++){
-      printf(" %9.2e",val[i*LDA+j]);
+      dsdp_printf(" %9.2e",val[i*LDA+j]);
     }
     for (j=i+1; j<M->LDA; j++){
-      printf(" %9.2e",val[i*LDA+j]);
+      dsdp_printf(" %9.2e",val[i*LDA+j]);
     }
-    printf("\n");
+    dsdp_printf("\n");
   }
   return 0;
 }
@@ -624,7 +624,7 @@ static void daddrow(double *v, double alpha, int i, double row[], int n){
 }
 /*
 static void printrow(double r[], int n){int i;
-    for (i=0;i<n;i++){printf(" %4.2e",r[i]);} printf("\n"); }
+    for (i=0;i<n;i++){dsdp_printf(" %4.2e",r[i]);} dsdp_printf("\n"); }
 */
 static int DTRUMatInverseMultiply(void* AA, int indx[], int nind, double x[], double y[],int n){
   dtrumat* A=(dtrumat*) AA;
@@ -1175,7 +1175,7 @@ static int DvecumatView(void* AA){
   double *val=M->val;
   for (i=0; i<M->n; i++){
     for (j=0; j<M->n; j++){
-      printf(" %4.2e",val[j]);
+      dsdp_printf(" %4.2e",val[j]);
     }
     val+=LDA;
   }

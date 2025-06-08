@@ -403,11 +403,11 @@ static int VechMatView(void* AA){
   const double *val=A->val;
   for (k=0; k<nnz; k++){
     getij(ind[k]-ishift,n,&i,&j);
-    printf("Row: %d, Column: %d, Value: %10.8f \n",i,j,A->alpha*val[k]);
+    dsdp_printf("Row: %d, Column: %d, Value: %10.8f \n",i,j,A->alpha*val[k]);
   }
   if (A->factored>0){
     info=VechMatGetRank(AA,&rank,n);DSDPCHKERR(info);
-    printf("Detected Rank: %d\n",rank);
+    dsdp_printf("Detected Rank: %d\n",rank);
   }
   return 0;
 }
@@ -565,7 +565,7 @@ static int VechMatComputeEigs(vechmat* AA,double DD[], int nn0, double W[], int 
       neigs++;
       /*
     } else if (fabs(W[k])>1.0e-100){
-      printf("SKIPPING EIGENVALUE: %4.4e, max is : %4.4e\n",W[k],maxeig);
+      dsdp_printf("SKIPPING EIGENVALUE: %4.4e, max is : %4.4e\n",W[k],maxeig);
       */
     } 
   }

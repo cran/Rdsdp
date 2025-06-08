@@ -94,7 +94,7 @@ int DSDPDSMatView(DSDPDSMat A){
   if (A.dsdpops->matview){
     info=(A.dsdpops->matview)(A.matdata); DSDPChkMatError(A,info);
   } else {
-    printf("No viewer available for matrix type: %s",A.dsdpops->matname);
+    dsdp_printf("No viewer available for matrix type: %s",A.dsdpops->matname);
   }
   DSDPFunctionReturn(0);
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include "dsdp_io.h"
 
 typedef enum {
   CfcOk=0,

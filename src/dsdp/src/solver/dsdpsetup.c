@@ -473,7 +473,7 @@ int DSDPSetDestroyRoutine(DSDP dsdp, int (*fd)(void*), void* ctx){
     dsdp->droutine[nd].ptr=ctx;
     dsdp->ndroutines++;
   } else {
-    printf("TOO MANY Destroy routines\n");
+    dsdp_printf("TOO MANY Destroy routines\n");
     return 1;
   }
   return 0;

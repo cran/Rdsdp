@@ -207,7 +207,7 @@ static int DSDPRX( void *dspcone, double mu, DSDPVec y, DSDPVec dy, DSDPVec AX,d
   info=BComputeS(K,dy,&dss);DSDPCHKERR(info);
   x=mu*(ss+ss*dss*ss);
   DSDPLogInfo(0,2,"DOBJCone SS: %4.4e, RESIDUAL X: %4.4e\n",1.0/ss,x);
-  if (fabs(x*ss)>1.0 && mu < 1) printf("Check Dual Min Bound\n");
+  if (fabs(x*ss)>1.0 && mu < 1) dsdp_printf("Check Dual Min Bound\n");
   info=DSDPVecAXPY(-x,K->bb,AX);DSDPCHKERR(info);
   DSDPFunctionReturn(0);
 }

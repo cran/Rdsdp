@@ -91,17 +91,17 @@ int DSDPPrintStats(DSDP dsdp, void *dummy){
     if (0 && reason==CONTINUE_ITERATING && iter>100 && iter%10!=0) return 0;
 
     if (iter==0){
-      printf("Iter   PP Objective      DD Objective    PInfeas   DInfeas     Nu     StepLength   Pnrm\n")
+      dsdp_printf("Iter   PP Objective      DD Objective    PInfeas   DInfeas     Nu     StepLength   Pnrm\n")
 	;
-      printf("---------------------------------------------------------------------------------------\n")
+      dsdp_printf("---------------------------------------------------------------------------------------\n")
 	;
     }
-    printf("%-3d %16.8e  %16.8e %9.1e %9.1e %9.1e",iter,ppobj,ddobj,pinfeas,res,mu);
-    printf("  %4.2f  %4.2f",pstp,dstp);
+    dsdp_printf("%-3d %16.8e  %16.8e %9.1e %9.1e %9.1e",iter,ppobj,ddobj,pinfeas,res,mu);
+    dsdp_printf("  %4.2f  %4.2f",pstp,dstp);
     if (pnorm>1.0e3){
-      printf("  %1.0e \n",pnorm);
+      dsdp_printf("  %1.0e \n",pnorm);
     } else {
-      printf("  %5.2f \n",pnorm);
+      dsdp_printf("  %5.2f \n",pnorm);
     }
     fflush(NULL);
   }

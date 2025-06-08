@@ -73,7 +73,7 @@ static int ZNorm2(void*A,int n,double *v){
 }
 
 static int ZView(void*A){
-  printf("All zeros\n");
+  dsdp_printf("All zeros\n");
   return 0;
 }
 

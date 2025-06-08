@@ -4,7 +4,7 @@
 void ShutDown(void){
 
   /*   sdpdat* sdt = sdat; */
-  printf("\n Shutdown --  ");
+  dsdp_printf("\n Shutdown --  ");
 
 } /* ShutDown */
 
@@ -14,23 +14,23 @@ int ExitProc(int  ccode,
 {
   xcode code=(xcode)ccode;
 
-  printf("\n Exit -- %d : ",ccode);
+  dsdp_printf("\n Exit -- %d : ",ccode);
   
   switch (code) {
     case OptFound:
-      printf("optimal solution found");
+      dsdp_printf("optimal solution found");
       return code;
     case OutOfSpc:
-      printf("out of memory space");
+      dsdp_printf("out of memory space");
       break;
     default:
       break;
   }
-  if (str) printf(", %s",str);
+  if (str) dsdp_printf(", %s",str);
 
   ShutDown();
 
-  printf("\n Exiting --  ");
+  dsdp_printf("\n Exiting --  ");
 
   return 1;
 } /* ExitProc */

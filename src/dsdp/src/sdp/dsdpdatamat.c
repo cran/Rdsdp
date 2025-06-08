@@ -426,7 +426,7 @@ int DSDPDataMatView(DSDPDataMat A){
   if (A.dsdpops->matview){
     info=(A.dsdpops->matview)(A.matdata); DSDPChkDataError(A,info);
   } else {
-    printf("No matrix view available for matrix type %s.\n",A.dsdpops->matname);
+    dsdp_printf("No matrix view available for matrix type %s.\n",A.dsdpops->matname);
   }
   DSDPFunctionReturn(0); 
 }

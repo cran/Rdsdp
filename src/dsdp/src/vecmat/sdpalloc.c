@@ -33,7 +33,7 @@ void cFree(char **x)
 {
  char *r = *x;
  /*
- printf("\n r %d &r %d",r,&r);
+ dsdp_printf("\n r %d &r %d",r,&r);
  getchar();
  */
    if(r)

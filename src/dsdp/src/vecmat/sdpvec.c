@@ -87,9 +87,9 @@ int DSDPVecRestoreArray(DSDPVec V, double **dptr){
 int DSDPVecView(DSDPVec vec){
   int i;
   for (i=0; i<vec.dim; i++){
-    printf("%3.3e ",vec.val[i]);
+    dsdp_printf("%3.3e ",vec.val[i]);
   }
-  printf("\n");
+  dsdp_printf("\n");
   return 0;
 }
 

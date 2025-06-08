@@ -618,7 +618,7 @@ int SDPConeView(SDPCone sdpcone){
   int blockj,info;
   DSDPFunctionBegin;
   for (blockj=0; blockj<sdpcone->nblocks; blockj++){
-    printf("Block: %d, Dimension: %d\n",blockj,sdpcone->blk[blockj].n);
+    dsdp_printf("Block: %d, Dimension: %d\n",blockj,sdpcone->blk[blockj].n);
     info=DSDPBlockView(&sdpcone->blk[blockj].ADATA);DSDPCHKERR(info);
   }
   DSDPFunctionReturn(0);
@@ -638,7 +638,7 @@ int SDPConeView2(SDPCone sdpcone){
   int blockj,info;
   DSDPFunctionBegin;
   for (blockj=0; blockj<sdpcone->nblocks; blockj++){
-    printf("Block: %d, Dimension: %d\n",blockj,sdpcone->blk[blockj].n);
+    dsdp_printf("Block: %d, Dimension: %d\n",blockj,sdpcone->blk[blockj].n);
     info=DSDPBlockView2(&sdpcone->blk[blockj].ADATA);DSDPCHKERR(info);
   }
   DSDPFunctionReturn(0);
@@ -659,23 +659,23 @@ int SDPConeView3(SDPCone sdpcone){
   DSDPFunctionBegin;
   for (blockj=0; blockj<sdpcone->nblocks; blockj++){
     n=sdpcone->blk[blockj].n;
-    printf("Block: %d \n",blockj);
-    printf(" Dimension: %d\n",n);
+    dsdp_printf("Block: %d \n",blockj);
+    dsdp_printf(" Dimension: %d\n",n);
     info=DSDPDSMatGetType(sdpcone->blk[blockj].DS,&id);
     if (id==1){
-      printf(" DS Matrix Type: Dense, Using LAPACK\n");
+      dsdp_printf(" DS Matrix Type: Dense, Using LAPACK\n");
     } else {
-      printf(" DS Matrix Type: %d\n",id);
+      dsdp_printf(" DS Matrix Type: %d\n",id);
     }
     info=DSDPDualMatGetType(sdpcone->blk[blockj].S,&id);
     if (id==1){
-      printf(" Dual Matrix Type: Dense, Using LAPACK\n");
+      dsdp_printf(" Dual Matrix Type: Dense, Using LAPACK\n");
     } else {
-      printf(" Dual Matrix Type: %d\n",id);
+      dsdp_printf(" Dual Matrix Type: %d\n",id);
     }
     info=DSDPBlockCountNonzeroMatrices(&sdpcone->blk[blockj].ADATA,&nnzmats);DSDPCHKERR(info);
-    printf(" Number of Data Matrices: %d of %d\n",nnzmats-1,sdpcone->m+1);
-    printf(" Number of Data Nonzeros: %d\n",sdpcone->blk[blockj].nnz);
+    dsdp_printf(" Number of Data Matrices: %d of %d\n",nnzmats-1,sdpcone->m+1);
+    dsdp_printf(" Number of Data Nonzeros: %d\n",sdpcone->blk[blockj].nnz);
   }
   DSDPFunctionReturn(0);
 }
@@ -704,7 +704,7 @@ int SDPConeCheckData(SDPCone sdpcone){
     W=sdpcone->blk[blockj].W;W2=sdpcone->blk[blockj].W2;
     S1=sdpcone->blk[blockj].S;S2=sdpcone->blk[blockj].SS;
     IS=sdpcone->blk[blockj].IS;
-    printf("Block: %d\n",blockj);
+    dsdp_printf("Block: %d\n",blockj);
     info=DSDPVMatCheck(T,W,W2);DSDPCHKERR(info);
     info=DSDPDSMatCheck(DS,W,W2,T);DSDPCHKERR(info);
     info=DSDPDualMatCheck(S1,W,W2,IS,T);DSDPCHKERR(info);
@@ -714,7 +714,7 @@ int SDPConeCheckData(SDPCone sdpcone){
     for (ii=0;ii<nnzmats;ii++){
       info=DSDPBlockGetMatrix(&sdpcone->blk[blockj].ADATA,ii,&i,&scl,&AA);DSDPCHKERR(info);
       if (i==0) continue;
-      printf(" Variable: %d, \n",i);
+      dsdp_printf(" Variable: %d, \n",i);
       info=DSDPDataMatCheck(AA,W,IS,T);DSDPCHKERR(info);
     }
   }

@@ -48,12 +48,12 @@ static int SpSymMatView(void *DS){
   double *an=ds->an;
   for (i=0;i<n;i++){
     k1=nnz[i]; k2=nnz[i+1];
-    printf("Row %d: ",i);
+    dsdp_printf("Row %d: ",i);
     for (j=k1;j<k2;j++){
-      if (col[j]==i){ printf("%d: %4.4f",col[j],2*an[j]); }
-      else { printf("%d: %4.4f",col[j],an[j]);}
+      if (col[j]==i){ dsdp_printf("%d: %4.4f",col[j],2*an[j]); }
+      else { dsdp_printf("%d: %4.4f",col[j],an[j]);}
     }
-    printf("\n");
+    dsdp_printf("\n");
   }
   return 0;
 }

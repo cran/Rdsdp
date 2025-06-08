@@ -453,7 +453,7 @@ static int DiagUpdate(double *dii,
   }
   else {
     if (fabs(*dii)<1.0e-35) {
-      printf(" diagonal nearly zero: %5.1e.\n",(*dii));
+      dsdp_printf(" diagonal nearly zero: %5.1e.\n",(*dii));
       return FALSE;
     }
   }
@@ -479,7 +479,7 @@ static int FacSnode(chfac  *cf,
     return (CfcIndef);
   
   if (fabs(cf->diag[itemp])<=cf->tolpiv) {
-      printf("Singular d[%d]=%e\n",
+      dsdp_printf("Singular d[%d]=%e\n",
       cf->subg[snde]+f,cf->diag[cf->subg[snde]+f]);
       return (CfcIndef);
   }
@@ -494,7 +494,7 @@ static int FacSnode(chfac  *cf,
       return (CfcIndef);
     
     if (fabs(cf->diag[itemp])<=cf->tolpiv) {
-      printf(" singular d[%d]=%e\n",
+      dsdp_printf(" singular d[%d]=%e\n",
              cf->subg[snde]+k,cf->diag[cf->subg[snde]+k]);
 
       return (CfcIndef);
@@ -526,7 +526,7 @@ static void UpdSnodes(int    m,
          *b0;
 
   if (m<s)
-    exit(0);
+    dsdp_exit(0);
 
   if (m==0 || n==0)
     return;
@@ -830,12 +830,12 @@ static void ExtUpdSnode(chfac  *cf,
 
   if (usnde==cf->nsnds-1) {
     if (usub[ujbeg[f]+start]<subg[usnde]) {
-      printf("\n Index error");
-      exit(0);
+      dsdp_printf("\n Index error");
+      dsdp_exit(0);
     }
 
     if (cf->sdens)
-      exit(0);
+      dsdp_exit(0);
 
     ls  = usub+ujbeg[f]+start;
     sze = ujsze[f]-start;
@@ -846,7 +846,7 @@ static void ExtUpdSnode(chfac  *cf,
     UpdSnodes(sze,l-f,sze,diag+f,uval,iw,diag+ls[0],uval,uhead+ls[0],ls);
   }
   else
-    exit(0);
+    dsdp_exit(0);
 } /* ExtUpdSnode */
 
 static void PushFward(chfac  *cf,
@@ -863,8 +863,8 @@ static void PushFward(chfac  *cf,
           *diag=cf->diag,*uval=cf->uval;
 
   if (f>subg[snde+1]-subg[snde]) {
-    printf("\n PushFward");
-    exit(0);
+    dsdp_printf("\n PushFward");
+    dsdp_exit(0);
   }
 
   if (f==l)
@@ -984,8 +984,8 @@ static int FacDenNode(chfac  *cf,
         offset = dbeg[k];
         s      = dsub[k];
         if (usub[ujbeg[subg[s]]+offset]<subg[cf->nsnds-1]) {
-          printf("\nindex error1");
-          exit(0);
+          dsdp_printf("\nindex error1");
+          dsdp_exit(0);
         }
 
         for(j=subg[s]; j<subg[s+1]; ++c, ++j) {
@@ -993,8 +993,8 @@ static int FacDenNode(chfac  *cf,
           iw[c] = uhead[j]+offset-(j-subg[s]);
 
           if (usub[ujbeg[j]+offset-(j-subg[s])]<subg[cf->nsnds-1]) {
-            printf("\nindex error");
-            exit(0);
+            dsdp_printf("\nindex error");
+            dsdp_exit(0);
           }
         }
       }
@@ -1033,7 +1033,7 @@ static int FacDenNode(chfac  *cf,
       --k;
 
     if (k>sncl)
-      exit(0);
+      dsdp_exit(0);
 
     sresp = FacSnode(cf,s,k0,k,iw,mode);
     if (sresp!=CfcOk)
@@ -1070,7 +1070,7 @@ int ChlFact(chfac  *cf,
         --k;
       
       if (k>sncl)
-        exit(0);
+        dsdp_exit(0);
 
       cid=FacSnode(cf,s,k0,k,iw,mode);
       if (cid!=CfcOk)

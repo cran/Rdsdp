@@ -62,11 +62,11 @@ static int RCMatDot(void* A, double x[], int nn, int n1, double *v){
 static int RCMatView(void* A){
   rcmat*RC=(rcmat*)A;
   int i;
-  printf("Row Col %d\n",RC->rc);
+  dsdp_printf("Row Col %d\n",RC->rc);
   for (i=0;i<RC->n;i++){
-    printf("%4.4e ",RC->val[i]);
+    dsdp_printf("%4.4e ",RC->val[i]);
   }
-  printf("\n");
+  dsdp_printf("\n");
   return 0;
 }
 

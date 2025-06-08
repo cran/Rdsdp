@@ -1,10 +1,10 @@
-PKG_CFLAGS=@PKG_CFLAGS@
-PKG_CPPFLAGS=@PKG_CPPFLAGS@
+PKG_CFLAGS=@PKG_CFLAGS@ -DUSING_R
+PKG_CPPFLAGS=@PKG_CPPFLAGS@ -DUSING_R
 PKG_LIBS=@PKG_LIBS@
 
 $(SHLIB): @DSDP_TS@
 
 dsdp.ts:
 	(cd dsdp && \
-	($(MAKE) dsdplibrary CC="$(CC)" CFLAGS="$(CFLAGS) $(CPICFLAGS) -DNOSHORTS -I../../include " AR="$(AR)" RANLIB="$(RANLIB)") && \
+	($(MAKE) dsdplibrary CC="$(CC)" CFLAGS="$(CFLAGS) $(PKG_CFLAGS) $(CPICFLAGS) -DNOSHORTS -I../../include " AR="$(AR)" RANLIB="$(RANLIB)") && \
 	touch $@)

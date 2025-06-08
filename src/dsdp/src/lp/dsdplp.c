@@ -550,7 +550,7 @@ For example, after calling DSDPComputeX(),
 int i,n;
 double *x;
 LPConeGetXArray(lpcone,&x,&n);
-for (i=0;i<n,i++) printf("x[%d] = %16.8f\n",x[i]);
+for (i=0;i<n,i++) dsdp_printf("x[%d] = %16.8f\n",x[i]);
 \endcode
 */
 int LPConeGetXArray(LPCone lpcone,double *x[], int *n){
@@ -744,9 +744,9 @@ int LPConeSetData2(LPCone lpcone,int n, const int ik[],const int cols[],const do
 int LPConeView2(LPCone lpcone){
   int info;
   DSDPFunctionBegin;
-  printf("LPCone Constraint Matrix\n");
+  dsdp_printf("LPCone Constraint Matrix\n");
   info=SpRowMatView(lpcone->A);DSDPCHKERR(info);
-  printf("LPCone Objective C vector\n");
+  dsdp_printf("LPCone Objective C vector\n");
   info=DSDPVecView(lpcone->C);DSDPCHKERR(info);
   DSDPFunctionReturn(0); 
 }
@@ -1033,7 +1033,7 @@ static int SpRowMatGetSize(smatx *M, int *m, int *n){
 static int SpRowMatDestroy(smatx* A){
 
   if (A->owndata){
-    printf("Can't free array");
+    dsdp_printf("Can't free array");
     return 1;
     /*
     if (A->an)  free(A->an);
@@ -1057,10 +1057,10 @@ static int SpRowMatView(smatx* M){
     k1=M->nnz[i]; k2=M->nnz[i+1];
 
     if (k2-k1 >0){
-      printf("Row %d, (Variable y%d) :  ",i,i+1);
+      dsdp_printf("Row %d, (Variable y%d) :  ",i,i+1);
       for (j=k1; j<k2; j++)
-	printf(" %4.2e x%d + ",M->an[j],M->col[j]);
-      printf("= dobj%d \n",i+1);
+	dsdp_printf(" %4.2e x%d + ",M->an[j],M->col[j]);
+      dsdp_printf("= dobj%d \n",i+1);
     }
   }
 
@@ -1085,19 +1085,19 @@ int LPConeView(LPCone lpcone){
   double cc;
   DSDPVec C=lpcone->C;
   DSDPFunctionBegin;
-  printf("LPCone Constraint Matrix\n");
-  printf("Number y variables 1 through %d\n",m);
+  dsdp_printf("LPCone Constraint Matrix\n");
+  dsdp_printf("Number y variables 1 through %d\n",m);
   for (i=0; i<n; i++){
-    printf("Inequality %d:  ",i);
+    dsdp_printf("Inequality %d:  ",i);
     for (j=0;j<m;j++){
       for (jj=nnz[j];jj<nnz[j+1];jj++){
 	if (row[jj]==i){
-	  printf("%4.2e y%d + ",an[jj],j+1);
+	  dsdp_printf("%4.2e y%d + ",an[jj],j+1);
 	}
       }
     }
     info=DSDPVecGetElement(C,i,&cc);DSDPCHKERR(info);
-    printf(" <= %4.2e\n",cc);
+    dsdp_printf(" <= %4.2e\n",cc);
   }
   DSDPFunctionReturn(0); 
 }

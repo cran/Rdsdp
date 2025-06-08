@@ -109,7 +109,7 @@ int DSDPVMatView(DSDPVMat X){
   if (X.dsdpops->matview){
     info=(X.dsdpops->matview)(X.matdata); DSDPChkMatError(X,info);
   } else {
-    printf("No viewer available for matrix type: %d",X.dsdpops->id);
+    dsdp_printf("No viewer available for matrix type: %d",X.dsdpops->id);
   }
   DSDPFunctionReturn(0);
 }
@@ -334,18 +334,18 @@ int DSDPVMatCheck(DSDPVMat X, SDPConeVec W1, SDPConeVec W2){
   info=DSDPVMatAddOuterProduct(X,1.23456,W1);DSDPCHKERR(info);
   info=DSDPVMatZeroEntries(X);DSDPCHKERR(info);
   info=DSDPVMatNormF2(X,&fnorm0);DSDPCHKERR(info);
-  if (fabs(fnorm0)>eps){ printf("Check DSDPVMatZero of DSDPVMatNorm\n");}
+  if (fabs(fnorm0)>eps){ dsdp_printf("Check DSDPVMatZero of DSDPVMatNorm\n");}
   
   info=SDPConeVecSet(one,W1);DSDPCHKERR(info);
   info=DSDPVMatAddOuterProduct(X,1.0,W1);DSDPCHKERR(info);
   info=DSDPVMatNormF2(X,&fnorm1);DSDPCHKERR(info);
-  if (fabs(fnorm1-n*n)>eps) printf("Check DSDPVMatZero()\n");
+  if (fabs(fnorm1-n*n)>eps) dsdp_printf("Check DSDPVMatZero()\n");
 
   info=DSDPVMatGetArray(X,&xx,&nn);DSDPCHKERR(info);
   for (i=0;i<nn;i++){xx[i]=1.0;}
   info=DSDPVMatRestoreArray(X,&xx,&nn);DSDPCHKERR(info);
   info=DSDPVMatNormF2(X,&fnorm2);DSDPCHKERR(info);
-  if (fabs(fnorm2-n*n)>eps) printf("Check DSDPXGetArray()\n");
+  if (fabs(fnorm2-n*n)>eps) dsdp_printf("Check DSDPXGetArray()\n");
 
   info=DSDPVMatAddOuterProduct(X,-1.0,W1);DSDPCHKERR(info);
   info=DSDPVMatNormF2(X,&fnorm3);DSDPCHKERR(info);
@@ -361,7 +361,7 @@ int DSDPVMatCheck(DSDPVMat X, SDPConeVec W1, SDPConeVec W2){
 
   info=DSDPVMatMult(X,W1,W2);DSDPCHKERR(info);
   info=DSDPVMatMinEigenvalue(X,W1,W2,&eig);DSDPCHKERR(info);
-  if (fabs(fnorm0)>eps) printf("Check DSDPVMatZero()\n");
+  if (fabs(fnorm0)>eps) dsdp_printf("Check DSDPVMatZero()\n");
   DSDPFunctionReturn(0);
 }
 

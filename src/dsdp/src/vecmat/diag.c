@@ -73,7 +73,7 @@ static int DiagMatView(void* AA){
   diagmat* A=(diagmat*) AA;
   int i;
   for (i=0;i<A->n; i++){
-    printf(" Row: %d, Column: %d, Value: %8.4e \n",i,i,A->val[i]);
+    dsdp_printf(" Row: %d, Column: %d, Value: %8.4e \n",i,i,A->val[i]);
   }
   return 0;
 }

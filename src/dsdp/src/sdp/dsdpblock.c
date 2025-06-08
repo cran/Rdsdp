@@ -457,10 +457,10 @@ int DSDPBlockView(DSDPBlockData *ADATA){
   DSDPFunctionBegin;
   for (ii=0;ii<ADATA->nnzmats;ii++){
     kk=ADATA->nzmat[ii];
-    if (kk==0){ printf("+ C\n");}
-    else { printf(" - A[%d] y%d\n",kk,kk);}
+    if (kk==0){ dsdp_printf("+ C\n");}
+    else { dsdp_printf(" - A[%d] y%d\n",kk,kk);}
   }
-  printf(" = S >= 0\n");
+  dsdp_printf(" = S >= 0\n");
   DSDPFunctionReturn(0);
 }
 #undef __FUNCT__
@@ -477,7 +477,7 @@ int DSDPBlockView2(DSDPBlockData *ADATA){
   DSDPFunctionBegin;
   for (ii=0;ii<ADATA->nnzmats;ii++){
     vari=ADATA->nzmat[ii];
-    printf("A[%d] y%d \n",vari,vari);
+    dsdp_printf("A[%d] y%d \n",vari,vari);
     info=DSDPDataMatView(ADATA->A[ii]); DSDPCHKERR(info);
   }
   DSDPFunctionReturn(0);
@@ -525,11 +525,11 @@ int DSDPDataMatCheck(DSDPDataMat AA, SDPConeVec W, DSDPIndex IS, DSDPVMat XX){
   info=DSDPVMatRestoreArray(XX, &xx, &nn); DSDPCHKERR(info);
   if (0==1){info=DSDPVMatView(XX);DSDPCHKERR(info);}
   info=DSDPVMatNormF2(XX,&dnorm); DSDPCHKERR(info);
-  printf("  %4.4e, %4.4e  %4.4e\n",esum,vAv,fnorm22);
-  printf("  error1: %4.4e, error2: %4.4e,  error3: %4.4e\n",sqrt(dnorm),fabs(esum-vAv),fabs(fnorm22-vAv));
-  if (dnorm>1)  printf("Check Add or eigs\n");
-  if (fabs(esum-vAv) > 1.0) printf("Check vAv \n");
-  if (fabs(fnorm22-vAv) > 1.0) printf("Check fnorm22\n");
+  dsdp_printf("  %4.4e, %4.4e  %4.4e\n",esum,vAv,fnorm22);
+  dsdp_printf("  error1: %4.4e, error2: %4.4e,  error3: %4.4e\n",sqrt(dnorm),fabs(esum-vAv),fabs(fnorm22-vAv));
+  if (dnorm>1)  dsdp_printf("Check Add or eigs\n");
+  if (fabs(esum-vAv) > 1.0) dsdp_printf("Check vAv \n");
+  if (fabs(fnorm22-vAv) > 1.0) dsdp_printf("Check fnorm22\n");
   
   DSDPFunctionReturn(0);
 }

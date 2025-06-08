@@ -389,9 +389,9 @@ int BConeView(BCone bcone){
   for (i=0;i<nn;i++){
     ii=ib[i];
     if (au[i]>0){
-      printf("Upper Bound.  Var %d: %4.8e\n",ii,u[i]);
+      dsdp_printf("Upper Bound.  Var %d: %4.8e\n",ii,u[i]);
     } else {
-      printf("Lower Bound.  Var %d: %4.8e\n",ii,u[i]);
+      dsdp_printf("Lower Bound.  Var %d: %4.8e\n",ii,u[i]);
     }
   }
   DSDPFunctionReturn(0);
@@ -461,7 +461,7 @@ BConeSetLowerBound(bcone,1,10.0);
 
 DSDPComputeX(dsdp);
 BConeCopyX(bcone,xl,xu,3);
-printf("The sensitivity of the solution to lower bound is %4.4f\n",xl[0]);
+dsdp_printf("The sensitivity of the solution to lower bound is %4.4f\n",xl[0]);
 \endcode
 */
 int DSDPCreateBCone(DSDP dsdp, BCone *dspcone){

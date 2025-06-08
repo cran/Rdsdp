@@ -15,8 +15,8 @@ extern int DSDPFFree(void**);
 /* Define some macros for memory management */
 
 /*
-#define DSDPFree(a)   0;printf("FREE: %s\n",__FUNCT__); free((*a))
-#define DSDPMalloc(a,b)  0;printf("Malloc: %s\n",__FUNCT__); if (b){*(b)=malloc((a)); }
+#define DSDPFree(a)   0;dsdp_printf("FREE: %s\n",__FUNCT__); free((*a))
+#define DSDPMalloc(a,b)  0;dsdp_printf("Malloc: %s\n",__FUNCT__); if (b){*(b)=malloc((a)); }
 */
 
 #ifdef DSDPMATLAB

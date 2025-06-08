@@ -292,8 +292,8 @@ int DSDPChooseBarrierParameter(DSDP dsdp, double mutarget, double *ppstep, doubl
     info=DSDPComputePDY(dsdp,pmumin,dsdp->dy,&pnorm); DSDPCHKERR(info);
     info=DSDPComputePY(dsdp,pstep,dsdp->ytemp); DSDPCHKERR(info);
     info=DSDPComputeSS(dsdp,dsdp->ytemp,PRIMAL_FACTOR,&psdefinite);DSDPCHKERR(info);
-    if (psdefinite==DSDP_FALSE){ dmury1*=0.9; /* printf("NO GOOD \n"); */ }
-    else { /* printf("ITS GOOD \n"); */}
+    if (psdefinite==DSDP_FALSE){ dmury1*=0.9; /* dsdp_printf("NO GOOD \n"); */ }
+    else { /* dsdp_printf("ITS GOOD \n"); */}
     attempt++;
     DSDPLogInfo(0,2,"GOT X: Smallest Mu for feasible X: %4.4e.\n",pmumin);
   }
@@ -304,7 +304,7 @@ int DSDPChooseBarrierParameter(DSDP dsdp, double mutarget, double *ppstep, doubl
   if (dsdp->pstep==1){
     mutarget2 = pmumin;
   } else {
-    /*      printf("PMUMIN: %4.4e MUTARGET: %4.4e \n",pmumin,dsdp->mutarget); */
+    /*      dsdp_printf("PMUMIN: %4.4e MUTARGET: %4.4e \n",pmumin,dsdp->mutarget); */
     mutarget2 = mutarget;
     mutarget2 = (pstep)*mutarget + (1.0-pstep)*dsdp->mu;
     mutarget2 = (pstep)*pmumin + (1.0-pstep)*dsdp->mu;

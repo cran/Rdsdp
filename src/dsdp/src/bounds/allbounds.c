@@ -205,7 +205,7 @@ int BoundYConeAddX(LUBounds lucone, double mu, DSDPVec Y, DSDPVec DY, DSDPVec XL
     lx=mu*(sl-sl*dsl*sl);
     ux=mu*(su-su*dsu*su);
     info=DSDPVecAddElement(XLU,i,ux-lx);DSDPCHKERR(info);
-    /*   printf("%d) %4.4f %4.4f %4.4f ",i,ux,lx,ux-lx); */
+    /*   dsdp_printf("%d) %4.4f %4.4f %4.4f ",i,ux,lx,ux-lx); */
     xsum1+=lx;
     xsum2+=ux;
     xdots+=lx/sl + ux/su;
@@ -418,8 +418,8 @@ int LUBoundsView(LUBounds lucone){
   DSDPFunctionBegin;
   LUConeValid(lucone);
   if (lucone->skipit==DSDP_TRUE){DSDPFunctionReturn(0);}
-  printf("Lower Bounds for all y variables: %4.8e\n",lbound);
-  printf("Upper Bounds for all y variables: %4.8e\n",ubound);
+  dsdp_printf("Lower Bounds for all y variables: %4.8e\n",lbound);
+  dsdp_printf("Upper Bounds for all y variables: %4.8e\n",ubound);
   DSDPFunctionReturn(0);
 }
 

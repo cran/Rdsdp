@@ -23,7 +23,11 @@ int DSDPFError(void *vobj, const char functionname[], int linen, const char file
   char        string[8*1024];
 
   DSDPFunctionBegin;
-  DSDPLogInfoFile = stdout; 
+#ifdef USING_R
+  DSDPLogInfoFile = DSDP_NULL;
+#else
+  DSDPLogInfoFile = stdout;
+#endif 
   /*
  if (DSDPLogPrintInfo == DSDP_FALSE) DSDPFunctionReturn(0);
   if ((DSDPLogPrintInfoNull == DSDP_FALSE) && !vobj) DSDPFunctionReturn(0);
@@ -31,16 +35,22 @@ int DSDPFError(void *vobj, const char functionname[], int linen, const char file
   urank = 0;
 
   va_start(Argp, message);
-  sprintf(string, "[%d] DSDP: %s(): Line %d in file %s ", urank,functionname,linen,filename);
+  dsdp_sprintf(string, "[%d] DSDP: %s(): Line %d in file %s ", urank,functionname,linen,filename);
   len = strlen(string);
 
 #if defined(DSDP_HAVE_VPRINTF_CHAR)
-  vsprintf(string+len, message, (char *) Argp);
+  // dsdp_vsprintf(string+len, message, (char *) Argp);
+  vsnprintf(string+len, sizeof(string)-len, message, (char *) Argp);
 #else
-  vsprintf(string+len, message, Argp);
+  // dsdp_vsprintf(string+len, message, Argp);
+  vsnprintf(string+len, sizeof(string)-len, message, Argp);
 #endif
+#ifdef USING_R
+  REprintf("%s", string);
+#else
   fprintf(DSDPLogInfoFile, "%s", string);
   fflush(DSDPLogInfoFile);
+#endif
   if (dsdp_history) {
 #if defined(DSDP_HAVE_VPRINTF_CHAR)
     vfprintf(dsdp_history, message, (char *) Argp);
@@ -120,7 +130,7 @@ int DSDPFFree(void** mmem){
 #endif    
     *mmem=0;
     if (0==1 && gotit==0){
-      printf(" DSDP MEMORY Error: Already Freed? \n");
+      dsdp_printf(" DSDP MEMORY Error: Already Freed? \n");
     }
   }
   DSDPFunctionReturn(0);
@@ -131,7 +141,7 @@ void DSDPMemoryLog(void){
   DSDPFunctionBegin;
   for (j=0;j<DSDPMEMMAX;j++){
     if (DSDPMemoryTable[j].size>0 && DSDPMemoryTable[j].freed==0){
-      printf("%d, MEMORY Not FREED: %s, %d \n",j,DSDPMemoryTable[j].fname,(int)DSDPMemoryTable[j].size);
+      dsdp_printf("%d, MEMORY Not FREED: %s, %d \n",j,DSDPMemoryTable[j].fname,(int)DSDPMemoryTable[j].size);
     }
   }
   

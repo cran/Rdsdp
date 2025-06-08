@@ -71,10 +71,14 @@ int DSDPLogInfoAllow(int flag, char *filename)
 
   DSDPFunctionBegin;
   if (flag && filename) {
-    sprintf(tname, ".%d", prank);
+    dsdp_sprintf(tname, ".%d", prank);
     ierr = strcat(fname, tname);
   } else if (flag) {
+#ifdef USING_R
+    DSDPLogInfoFile = DSDP_NULL;
+#else    
     DSDPLogInfoFile = stdout;
+#endif
   }
   DSDPLogPrintInfo     = flag;
   DSDPLogPrintInfoNull = flag;
@@ -91,7 +95,7 @@ int DSDPLogInfoAllow(int flag, char *filename)
 
     Input Parameter:
 +   vobj - object most closely associated with the logging statement
--   message - logging message, using standard "printf" format
+-   message - logging message, using standard "dsdp_printf" format
 
     Options Database Key:
 $    -log_info : activates printing of DSDPLogInfo() messages 
@@ -116,7 +120,11 @@ void  DSDPLogFInfo(void *vobj, int outlevel, const char message[], ...)
   char        string[8*1024];
 
   DSDPFunctionBegin;
+#ifdef USING_R
+  DSDPLogInfoFile = DSDP_NULL;
+#else
   DSDPLogInfoFile = stdout; 
+#endif
   if (DSDPLogPrintInfo < outlevel) return;
   if ((DSDPLogPrintInfoNull < outlevel) && !vobj) return;
 
@@ -124,15 +132,21 @@ void  DSDPLogFInfo(void *vobj, int outlevel, const char message[], ...)
   if (rank>0) return;
 
   va_start(Argp, message);
-  sprintf(string, "[%d][%2d] DSDP: ", rank,outlevel);
+  dsdp_sprintf(string, "[%d][%2d] DSDP: ", rank,outlevel);
   len = strlen(string);
 #if defined(DSDP_HAVE_VPRINTF_CHAR)
-  vsprintf(string+len, message, (char *) Argp);
+  // dsdp_vsprintf(string+len, message, (char *) Argp);
+  vsnprintf(string+len, sizeof(string)-len, message, (char *) Argp);
 #else
-  vsprintf(string+len, message, Argp);
+  // dsdp_vsprintf(string+len, message, Argp);
+  vsnprintf(string+len, sizeof(string)-len, message, Argp);
 #endif
+#ifdef USING_R
+  Rprintf("%s", string);
+#else  
   fprintf(DSDPLogInfoFile, "%s", string);
   fflush(DSDPLogInfoFile);
+#endif
   if (dsdp_history) {
 #if defined(DSDP_HAVE_VPRINTF_CHAR)
     vfprintf(dsdp_history, message, (char *) Argp);

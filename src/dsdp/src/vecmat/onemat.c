@@ -156,7 +156,7 @@ static int ConstMatCountNonzeros(void*A, int *nnz, int n){
 
 static int ConstMatView(void* AA){
   cmat* A = (cmat*)AA;
-  printf("Every element of the matrix is the same: %10.8e\n",A->cnst);
+  dsdp_printf("Every element of the matrix is the same: %10.8e\n",A->cnst);
   return 0;
 }
 

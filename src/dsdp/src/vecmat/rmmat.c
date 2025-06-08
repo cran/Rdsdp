@@ -42,7 +42,7 @@ int DSDPGetR1Mat(int n, double ev, int ishift, const int spai[], const double sp
   DSDPFunctionBegin;
   for (i=0;i<nnz;i++){
     if (spai[i]-ishift<0 || spai[i]-ishift >=n){
-      printf("Invalid entry: Entry %d . Is %d <= %d < %d?\n",i,ishift,spai[i],n+ishift);
+      dsdp_printf("Invalid entry: Entry %d . Is %d <= %d < %d?\n",i,ishift,spai[i],n+ishift);
       return 1;
     }
   }
@@ -293,9 +293,9 @@ static int R1MatCountNonzeros(void*A, int *nnz, int n){
 static int R1MatView(void* A){
   int i;
   r1mat* AA = (r1mat*)A;
-  printf("This matrix is %4.8e times the outer product of \n",AA->ev);
+  dsdp_printf("This matrix is %4.8e times the outer product of \n",AA->ev);
   for (i=0;i<AA->nnz;i++){
-    printf("%d  %4.8e \n",AA->spai[i],AA->spval[i]);
+    dsdp_printf("%d  %4.8e \n",AA->spai[i],AA->spval[i]);
   }
   return 0;
 }

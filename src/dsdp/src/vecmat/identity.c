@@ -131,7 +131,7 @@ static int IdentityMatFNorm2(void* AA, int n, double *v){
 
 static int IdentityMatView(void* AA){
   identitymat* A=(identitymat*)AA;
-  printf("Multiple of Identity matrix: All Diagonal elements equal %8.8e \n",A->dm);
+  dsdp_printf("Multiple of Identity matrix: All Diagonal elements equal %8.8e \n",A->dm);
   return 0;
 }
 

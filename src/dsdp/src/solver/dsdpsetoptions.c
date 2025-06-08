@@ -197,55 +197,55 @@ int DSDPView(DSDP dsdp){
 
   DSDPFunctionBegin;
   info=DSDPGetMaxIts(dsdp,&maxit); DSDPCHKERR(info);
-  printf("Terminate DSDP after %d iterations.\n",maxit);
+  dsdp_printf("Terminate DSDP after %d iterations.\n",maxit);
   info=DSDPGetDualBound(dsdp,&dbound); DSDPCHKERR(info);
-  printf("Terminate DSDP if dual objective is greater than %8.4e\n",dbound);
+  dsdp_printf("Terminate DSDP if dual objective is greater than %8.4e\n",dbound);
   info=DSDPGetGapTolerance(dsdp,&gaptol);DSDPCHKERR(info);
-  printf("Terminate DSDP if the relative duality gap is less than %8.4e\n",gaptol);
+  dsdp_printf("Terminate DSDP if the relative duality gap is less than %8.4e\n",gaptol);
   info=DSDPGetStepTolerance(dsdp,&steptol); DSDPCHKERR(info);
-  printf("Terminate DSDP if step length in D less than %8.4e\n",steptol);
+  dsdp_printf("Terminate DSDP if step length in D less than %8.4e\n",steptol);
   info=DSDPGetPNormTolerance(dsdp,&pnormtol); DSDPCHKERR(info);
-  printf("Terminate DSDP only if Pnorm less than %8.4e\n",pnormtol);
+  dsdp_printf("Terminate DSDP only if Pnorm less than %8.4e\n",pnormtol);
   info=DSDPGetMaxTrustRadius(dsdp,&maxtrust); DSDPCHKERR(info);
-  printf("Max Trust Radius is %8.4e\n",maxtrust); 
+  dsdp_printf("Max Trust Radius is %8.4e\n",maxtrust); 
   info=DSDPGetReuseMatrix(dsdp,&reuse);DSDPCHKERR(info);
-  printf("Reapply Hessian of Barrier up to %d times per iteration.\n",reuse);
+  dsdp_printf("Reapply Hessian of Barrier up to %d times per iteration.\n",reuse);
 
   info=DSDPGetDataNorms(dsdp,dnorm);DSDPCHKERR(info);
-  printf("The norms of C: %8.4e, A: %4.4e, and b: %8.4e\n",dnorm[0],dnorm[1],dnorm[2]);
+  dsdp_printf("The norms of C: %8.4e, A: %4.4e, and b: %8.4e\n",dnorm[0],dnorm[1],dnorm[2]);
   info=DSDPGetNumberOfVariables(dsdp,&m);DSDPCHKERR(info);
-  printf("There are %d y variables:  ",m);
+  dsdp_printf("There are %d y variables:  ",m);
   info=DSDPGetYMaxNorm(dsdp,&ymax); DSDPCHKERR(info);
-  printf("largest is %8.4e, ",ymax);
+  dsdp_printf("largest is %8.4e, ",ymax);
   info=DSDPGetYBounds(dsdp,&ylow,&yhigh);DSDPCHKERR(info);
-  printf("bounded below by %8.4e and above by %8.4e. \n",ylow,yhigh);
+  dsdp_printf("bounded below by %8.4e and above by %8.4e. \n",ylow,yhigh);
   info=DSDPGetTraceX(dsdp,&tracex);DSDPCHKERR(info);
-  printf("The X variables have a trace of %8.4e ",tracex);
+  dsdp_printf("The X variables have a trace of %8.4e ",tracex);
   info=DSDPGetPenaltyParameter(dsdp,&penalty); DSDPCHKERR(info);
-  printf("bounded by penalty parameter: %8.4e\n",penalty);
+  dsdp_printf("bounded by penalty parameter: %8.4e\n",penalty);
   info=DSDPGetBarrierParameter(dsdp,&mu0);DSDPCHKERR(info);
-  printf("Current Barrier Parameter: %8.4e\n",mu0);
+  dsdp_printf("Current Barrier Parameter: %8.4e\n",mu0);
   info=DSDPGetPotentialParameter(dsdp,&rho); DSDPCHKERR(info);
-  printf("Potential Parameter: %8.4e ( times dimension) \n",rho);
+  dsdp_printf("Potential Parameter: %8.4e ( times dimension) \n",rho);
   info=DSDPGetPotential(dsdp,&potential);DSDPCHKERR(info);
-  printf("The value of the potential function is %8.4e\n",potential);
+  dsdp_printf("The value of the potential function is %8.4e\n",potential);
   info=DSDPGetRTolerance(dsdp,&inftol); DSDPCHKERR(info);
-  printf("(D) Feasible only if R < %8.4e\n",inftol);
+  dsdp_printf("(D) Feasible only if R < %8.4e\n",inftol);
   info=DSDPGetPTolerance(dsdp,&infptol); DSDPCHKERR(info);
-  printf("(P) Feasible only if Pinfeas < %8.4e\n",infptol);
+  dsdp_printf("(P) Feasible only if Pinfeas < %8.4e\n",infptol);
   info=DSDPGetSolutionType(dsdp,&pdfeasible);DSDPCHKERR(info);
   if (pdfeasible==DSDP_PDFEASIBLE){
-    printf(" DSDP Solutions are both feasible and bounded\n");
+    dsdp_printf(" DSDP Solutions are both feasible and bounded\n");
   } else if (pdfeasible==DSDP_UNBOUNDED){
-    printf(" (D) is unbounded and (P) is infeasible\n");
+    dsdp_printf(" (D) is unbounded and (P) is infeasible\n");
   } else if (pdfeasible==DSDP_INFEASIBLE){
-    printf(" (D) is infeasible and (D) is unbounded\n");
+    dsdp_printf(" (D) is infeasible and (D) is unbounded\n");
   } else if (pdfeasible==DSDP_PDUNKNOWN){
-    printf(" Hmm.  Not clear whether either solution is feasible.\n");
+    dsdp_printf(" Hmm.  Not clear whether either solution is feasible.\n");
   }
   info=DSDPGetFinalErrors(dsdp,derror);DSDPCHKERR(info);
-  printf("The errors: %8.4e, %4.4e, %8.4e, ",derror[0],derror[1],derror[2]);
-  printf("%8.4e, %4.4e, %8.4e\n",derror[3],derror[4],derror[5]);
+  dsdp_printf("The errors: %8.4e, %4.4e, %8.4e, ",derror[0],derror[1],derror[2]);
+  dsdp_printf("%8.4e, %4.4e, %8.4e\n",derror[3],derror[4],derror[5]);
   DSDPFunctionReturn(0);
 }
 
@@ -279,6 +279,6 @@ static char dsdpoptions[]="\
  */
 int DSDPPrintOptions(void){
   DSDPFunctionBegin;
-  printf("%s",dsdpoptions); 
+  dsdp_printf("%s",dsdpoptions); 
   DSDPFunctionReturn(0);
 }

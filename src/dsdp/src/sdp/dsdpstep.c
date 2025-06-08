@@ -101,8 +101,8 @@ int DSDPLanczosInitialize( DSDPLanczosStepLength *LZ ){
   LZ->darray=0;
   /*
   if (id1==0 && id2==0){
-  DSDPEventLogRegister("STEP EIGS",&id1); printf("ID1: %d\n",id1);
-  DSDPEventLogRegister("STEP MULT",&id2); printf("ID2: %d\n",id2);
+  DSDPEventLogRegister("STEP EIGS",&id1); dsdp_printf("ID1: %d\n",id1);
+  DSDPEventLogRegister("STEP MULT",&id2); dsdp_printf("ID2: %d\n",id2);
   }
   */
   DSDPFunctionReturn(0);
@@ -332,7 +332,7 @@ static int ComputeStepROBUST(Mat3 A, SDPConeVec *Q, int m, SDPConeVec W, SDPCone
   DSDPLogInfo("VNorm: %3.1e, ",wnorm);
   */
   /*
-  printf("  ---  TRI DIAGONAL MATRIX ---- \n");
+  dsdp_printf("  ---  TRI DIAGONAL MATRIX ---- \n");
   */
 
 
@@ -451,7 +451,7 @@ static int ComputeStepFAST(Mat3 A, SDPConeVec *Q, int m, SDPConeVec W, double *d
     }
     
     info = SDPConeVecNorm2(W,&wnorm);DSDPCHKERR(info);
-    /*    printf("PHI: %4.4e, VNORM: %4.2e Diag: %4.2e\n",phi,wnorm,diag[i]); */
+    /*    dsdp_printf("PHI: %4.4e, VNORM: %4.2e Diag: %4.2e\n",phi,wnorm,diag[i]); */
     if (i<m-1){
       subdiag[i]=wnorm;
     }

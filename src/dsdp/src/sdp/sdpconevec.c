@@ -49,9 +49,9 @@ int SDPConeVecDestroy(SDPConeVec *V){
 int SDPConeVecView(SDPConeVec V){
   int i;
   for (i=0; i<V.dim; i++){
-    printf("%3.3e ",V.val[i]);
+    dsdp_printf("%3.3e ",V.val[i]);
   }
-  printf("\n");
+  dsdp_printf("\n");
   return 0;
 }
 
@@ -279,10 +279,10 @@ int DSDPIndexDestroy(DSDPIndex *IS){
 int DSDPIndexView(DSDPIndex IS){
   int i;
   DSDPFunctionBegin;
-  printf("Index Set with %d indices.\n",IS.indx[0]);
+  dsdp_printf("Index Set with %d indices.\n",IS.indx[0]);
   for (i=0;i<IS.indx[0];i++){
-    printf(" %d",IS.indx[i+1]);
+    dsdp_printf(" %d",IS.indx[i+1]);
   }
-  printf(" \n");
+  dsdp_printf(" \n");
   DSDPFunctionReturn(0);
 }

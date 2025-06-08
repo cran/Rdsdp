@@ -98,7 +98,7 @@ static int DSDPCreateM(MCholSolverALL *ABA, chfac **M, int rrnnz[],int tnnz[], i
     for (j=i+1;j<m;j++){ if (tnnz[j]>0) {snnz[tt]=j; tt++;} } 
   }
 
-  printf("Trying Sparse M: Total nonzeros: %d of %d \n",totalnnz,m*(m-1)/2 );
+  dsdp_printf("Trying Sparse M: Total nonzeros: %d of %d \n",totalnnz,m*(m-1)/2 );
   /* Create sparse dual matrix structure */
   SymbProc(rnnz+1,snnz,n,&sfptr);
   ABA->isdense=0;
@@ -144,7 +144,7 @@ static int DSDPLinearSolverPrepare(void* ctx,int*flag){
   Cfact=(cfc_sta)ChlFact(sf,sf->iw,sf->rw,FALSE);
   */
   Cfact=(cfc_sta)ChlFact(sf,sf->iw,sf->rw,TRUE);
-  if (CfcOk!=Cfact ){ *flag=1; /*  printf("Not Good factorization \n"); */ }
+  if (CfcOk!=Cfact ){ *flag=1; /*  dsdp_printf("Not Good factorization \n"); */ }
   DSDPFunctionReturn(0);
 }
 
@@ -321,7 +321,7 @@ static int DSDPCreateSchurMatrix(void *ctx, int m){
   if (totalnnz*2+m > m*m*0.1 && dsdpuselapack) {
     gotit=1;
     info=DSDPGetLAPACKSUSchurOps(m,&tmatops,&tdata); 
-    /* DSDPCHKERR(info); */ if (info) {gotit=0;printf("Try packed format\n"); }
+    /* DSDPCHKERR(info); */ if (info) {gotit=0;dsdp_printf("Try packed format\n"); }
     DSDPLogInfo(0,8,"Creating Dense Full LAPACK Schur Matrix\n");
     info=DSDPSetSchurMatOps(dsdp,tmatops,tdata); DSDPCHKERR(info);
   } 
